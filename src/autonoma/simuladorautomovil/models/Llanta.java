@@ -28,7 +28,7 @@ public abstract class Llanta {
         this.velocidadMaxima = velocidadMaxima;
     }
     
-    public abstract void verificarDesgaste();
+    public abstract String verificarDesgaste();
     
     
 }
