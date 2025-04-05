@@ -4,6 +4,7 @@
  */
 package autonoma.simuladorautomovil.main;
 
+import autonoma.simuladorautomovil.exceptions.ErrorEnArchivoConfiguracionException;
 import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.LectorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.Llanta;
