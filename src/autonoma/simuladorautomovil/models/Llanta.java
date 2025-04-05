@@ -6,8 +6,14 @@ package autonoma.simuladorautomovil.models;
 
 /**
  *
- * @author USUARIO
+ *  
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @since 20250405
+ * @see 
+ * @version 1.0.0
  */
-public class Llanta {
+ 
+public abstract class Llanta {
+    
     
 }
