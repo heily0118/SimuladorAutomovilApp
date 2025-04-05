@@ -14,6 +14,21 @@ package autonoma.simuladorautomovil.models;
  */
  
 public abstract class Llanta {
+    private int velocidadMaxima;
+
+    public Llanta(int velocidadMaxima) {
+        this.velocidadMaxima = velocidadMaxima;
+    }
+
+    public int getVelocidadMaxima() {
+        return velocidadMaxima;
+    }
+
+    public void setVelocidadMaxima(int velocidadMaxima) {
+        this.velocidadMaxima = velocidadMaxima;
+    }
+    
+    public abstract void verificarDesgaste();
     
     
 }
