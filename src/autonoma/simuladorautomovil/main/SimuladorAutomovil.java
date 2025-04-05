@@ -36,9 +36,18 @@ public class SimuladorAutomovil {
         Vehiculo vehiculo = null;
 
         String tipoLlanta = null;
-        if (tipoLlanta == null) {
-         System.out.println("tipoLlanta es null. Revisa el archivo de configuración.");
-         return;
+        try {
+            LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano();
+            ArrayList<String> lineas = lector.leer("C:\\Heily\\SimuladorAutomovil\\config.csv");
+            if (!lineas.isEmpty()) {
+                tipoLlanta = lineas.get(0).trim();
+            } else {
+                JOptionPane.showMessageDialog(null, "El archivo de configuración está vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error leyendo archivo de configuración: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         try {
            

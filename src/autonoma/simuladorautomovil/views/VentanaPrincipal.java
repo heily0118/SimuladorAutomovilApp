@@ -28,7 +28,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
     initComponents();
-    setSize(700, 650);
+    setSize(750, 700);
     setResizable(false);
     this.setLocationRelativeTo(null);
 
@@ -73,6 +73,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Acelerar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/AutoDentro.jpg"))); // NOI18N
 
@@ -131,20 +133,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vehiculo.acelerar(velocidadAcelerar);
         eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
 
-        // Mostrar velocidad en pantalla
+       
         etiquetaVelocidad.setText("Velocidad actual: " + vehiculo.getVelocidadActual() + " km/h");
 
         
         if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
             labelGif.setVisible(true); 
-            eventos.add("⚠️ Se superó la velocidad permitida. ¡Peligro de accidente!");
+            eventos.add(" Se superó la velocidad permitida. ¡Peligro de accidente!");
         } else {
             labelGif.setVisible(false); 
         }
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        eventos.add("❌ Error al acelerar: " + e.getMessage());
+        eventos.add(" Error al acelerar: " + e.getMessage());
     }
     }//GEN-LAST:event_AcelerarActionPerformed
 
