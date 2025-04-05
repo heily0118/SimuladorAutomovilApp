@@ -1,0 +1,5 @@
+Simulación iniciada 🚗
+Vehículo encendido correctamente
+Aceleración exitosa a 40 km/h
+Frenado brusco detectado... ¡el vehículo patinó!
+Simulación finalizada.
