@@ -14,20 +14,20 @@ package autonoma.simuladorautomovil.models;
  */
 
 public class Motor {
-    private String tipoMotor;
+    private String cilindraje;
     private int velocidadMaxima;
 
-    public Motor(String tipoMotor, int velocidadMaxima) {
-        this.tipoMotor = tipoMotor;
+    public Motor(String cilindraje, int velocidadMaxima) {
+        this.cilindraje = cilindraje;
         this.velocidadMaxima = velocidadMaxima;
     }
 
-    public String getTipoMotor() {
-        return tipoMotor;
+    public String getCilindraje() {
+        return cilindraje;
     }
 
-    public void setTipoMotor(String tipoMotor) {
-        this.tipoMotor = tipoMotor;
+    public void setCilindraje(String cilindraje) {
+        this.cilindraje = cilindraje;
     }
 
     public int getVelocidadMaxima() {
