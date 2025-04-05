@@ -11,6 +11,7 @@ import autonoma.simuladorautomovil.models.Llanta;
 import autonoma.simuladorautomovil.models.LlantaBuena;
 import autonoma.simuladorautomovil.models.Motor;
 import autonoma.simuladorautomovil.models.Vehiculo;
+import autonoma.simuladorautomovil.views.VentanaPrincipal;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -25,18 +26,19 @@ import javax.swing.JOptionPane;
  */
 public class SimuladorAutomovil {
 public static void main(String[] args) {
+    
+       VentanaPrincipal ventana = new VentanaPrincipal();
+       ventana.setVisible(true);   
 
         ArrayList<String> eventos = new ArrayList<>();
         Vehiculo vehiculo = null;
 
         try {
            
-            LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano("C:\\Heily\\SimuladorAutomovil\\config.txt");
-            vehiculo = lector.leerVehiculo();
-            eventos.add("✅ Vehículo configurado con éxito.");
+           
 
         } catch (ErrorEnArchivoConfiguracionException e) {
-            JOptionPane.showMessageDialog(null, "⚠️ Error leyendo configuración: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, " Error leyendo configuración: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;  
         }
 
