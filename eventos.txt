@@ -1,0 +1,1 @@
+Cannot invoke "autonoma.simuladorautomovil.models.Vehiculo.encender()" because "vehiculo" is null
