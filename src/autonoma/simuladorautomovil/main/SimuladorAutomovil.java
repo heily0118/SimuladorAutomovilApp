@@ -4,6 +4,11 @@
  */
 package autonoma.simuladorautomovil.main;
 
+import autonoma.simuladorautomovil.models.Llanta;
+import autonoma.simuladorautomovil.models.LlantaBuena;
+import autonoma.simuladorautomovil.models.Motor;
+import autonoma.simuladorautomovil.models.Vehiculo;
+
 /**
  *
  *  
@@ -14,11 +19,25 @@ package autonoma.simuladorautomovil.main;
  */
 public class SimuladorAutomovil {
 
+      public static void main(String[] args) {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+  
+       
+        Llanta llantas = new LlantaBuena(110);  
+         Motor motor = new Motor("2000 cc", 160);
+        Vehiculo vehiculo = new Vehiculo(llantas,motor);  
+
+        try {
+            // Realizando acciones y mostrando los resultados devueltos por cada método
+            System.out.println(vehiculo.encender());
+            System.out.println(vehiculo.acelerar(50));
+            System.out.println(vehiculo.frenar(30));
+            System.out.println(vehiculo.apagar());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     
+    }
 }

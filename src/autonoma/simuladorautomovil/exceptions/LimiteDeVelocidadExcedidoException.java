@@ -2,15 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package autonoma.simuladorautomovil.models;
+package autonoma.simuladorautomovil.exceptions;
 
 /**
  *
  * @author USUARIO
  */
-public class AccidentePorAceleracionException extends Exception {
+public class LimiteDeVelocidadExcedidoException extends RuntimeException{
 
-    public AccidentePorAceleracionException() {
+    public LimiteDeVelocidadExcedidoException() {
+        super("Límite de velocidad excedido.");
     }
+    
+    
     
 }

@@ -6,7 +6,8 @@ package autonoma.simuladorautomovil.models;
 
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
-
+import autonoma.simuladorautomovil.exceptions.AccidentePorAceleracionException;
+import autonoma.simuladorautomovil.exceptions.LimiteDeVelocidadExcedidoException;
 /**
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
@@ -69,11 +70,11 @@ public class Vehiculo {
             throw new VehiculoEncendidoException();
         }
         estaEncendido = true;
-        return "Vehículo encendido.";
+        return "Vehiculo encendido.";
     }
     
     
-    public String apagar() throws AccidentePorAceleracionException {
+    public String apagar() {
         if (!estaEncendido) {
             throw new VehiculoApagadoException();
         }
@@ -82,7 +83,29 @@ public class Vehiculo {
          }
         estaEncendido = false;
         velocidadActual = 0; 
-        return "Vehículo apagado.";
+        return "Vehiculo apagado.";
+    
     }
-
+    
+     public String acelerar(int cantidad) {
+        if (!estaEncendido) {
+            throw new VehiculoApagadoException();
+        }
+        if (velocidadActual+ cantidad > llantas.getVelocidadMaxima()) {
+            throw new LimiteDeVelocidadExcedidoException();
+        }
+        velocidadActual+= cantidad;
+        return "Vehiculo acelerado a " + velocidadActual+ " km/h.";
+    }
+     
+      public String frenar(int cantidad) {
+        if (!estaEncendido) {
+            throw new VehiculoApagadoException();
+        }
+        if (velocidadActual == 0) {
+            return "El vehiculo ya está detenido.";
+        }
+        velocidadActual = Math.max(0, velocidadActual - cantidad);
+        return "Vehiculo frenado a " + velocidadActual+ " km/h.";
+    }
 }
