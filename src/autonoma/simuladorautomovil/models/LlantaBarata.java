@@ -6,8 +6,21 @@ package autonoma.simuladorautomovil.models;
 
 /**
  *
- * @author USUARIO
+ * @author María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
+ * @since 20250405
+ * @version 1.0.0
+ * 
  */
-public class LlantaBarata {
+public class LlantaBarata extends Llanta {
+
+    public LlantaBarata(int velocidadMaxima) {
+        super(velocidadMaxima);
+    }
+    
+
+    @Override
+    public String verificarDesgaste() {
+        return "Esta llanta es barata";
+    }
     
 }

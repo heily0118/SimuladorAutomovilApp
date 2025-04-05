@@ -19,7 +19,7 @@ public class LlantaBuena extends Llanta {
 
     @Override
     public String verificarDesgaste() {
-        return "Esta llanata es buena";
+        return "Esta llanta es buena";
     }
     
 }
