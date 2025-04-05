@@ -4,10 +4,15 @@
  */
 package autonoma.simuladorautomovil.main;
 
+import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
+import autonoma.simuladorautomovil.models.LectorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.Llanta;
 import autonoma.simuladorautomovil.models.LlantaBuena;
 import autonoma.simuladorautomovil.models.Motor;
 import autonoma.simuladorautomovil.models.Vehiculo;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,26 +23,48 @@ import autonoma.simuladorautomovil.models.Vehiculo;
  * @version 1.0.0
  */
 public class SimuladorAutomovil {
+public static void main(String[] args) {
 
-      public static void main(String[] args) {
-    /**
-     * @param args the command line arguments
-     */
-  
-       
-        Llanta llantas = new LlantaBuena(110);  
-         Motor motor = new Motor("2000 cc", 160);
-        Vehiculo vehiculo = new Vehiculo(llantas,motor);  
+        ArrayList<String> eventos = new ArrayList<>();
+        Vehiculo vehiculo = null;
 
         try {
-            // Realizando acciones y mostrando los resultados devueltos por cada método
-            System.out.println(vehiculo.encender());
-            System.out.println(vehiculo.acelerar(50));
-            System.out.println(vehiculo.frenar(30));
-            System.out.println(vehiculo.apagar());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+           
+            LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano("C:\\Heily\\SimuladorAutomovil\\config.txt");
+            vehiculo = lector.leerVehiculo();
+            eventos.add("✅ Vehículo configurado con éxito.");
+
+        } catch (ErrorEnArchivoConfiguracionException e) {
+            JOptionPane.showMessageDialog(null, "⚠️ Error leyendo configuración: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;  
         }
-    
+
+        try {
+            
+            vehiculo.encender();
+            eventos.add("Encendido correctamente.");
+
+            vehiculo.acelerar(50);
+            eventos.add("Acelero a " + vehiculo.getVelocidadActual() + " km/h.");
+
+            vehiculo.frenar(20);
+            eventos.add("Freno a " + vehiculo.getVelocidadActual() + " km/h.");
+
+            vehiculo.apagar();
+            eventos.add("Apagado correctamente.");
+
+        } catch (Exception e) {
+            eventos.add( e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
+        
+        try {
+            EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("C:\\Heily\\SimuladorAutomovil\\eventos.txt");
+            escritor.escribir(eventos);
+            System.out.println("Eventos guardados.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, " Error guardando eventos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
