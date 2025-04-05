@@ -4,34 +4,60 @@
  */
 package autonoma.simuladorautomovil.views;
 
+import autonoma.simuladorautomovil.models.LlantaBuena;
+import autonoma.simuladorautomovil.models.Motor;
 import javax.swing.ImageIcon;
+import autonoma.simuladorautomovil.models.Vehiculo;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author USUARIO
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
+    
+    private Vehiculo vehiculo;
+   private ArrayList<String> eventos = new ArrayList<>();
+   private JLabel etiquetaVelocidad;
+    private JLabel labelGif;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
-        initComponents();
-        setSize(700, 650);
-        setResizable(false);
-        this.setLocationRelativeTo(null);
-       
-        
-        
-        try{ 
-        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/SimuladorAutomovil/images/Automovil.png")).getImage());
-        
-        }catch(NullPointerException e){
-            System.out.println("Imagen no encontrada");
-            
-        }
-        
+    initComponents();
+    setSize(700, 650);
+    setResizable(false);
+    this.setLocationRelativeTo(null);
+
+    
+    vehiculo = new Vehiculo(new LlantaBuena(100), new Motor("300 C", 3000));
+    eventos = new ArrayList<>();
+
+    
+    etiquetaVelocidad = new JLabel("Velocidad actual: 0 km/h");
+    etiquetaVelocidad.setBounds(20, 500, 300, 30); 
+    add(etiquetaVelocidad);
+
+   
+    try {
+        labelGif = new JLabel(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/ChoqueCarro.gif")));
+        labelGif.setBounds(400, 400, 200, 150); 
+        labelGif.setVisible(false); 
+        add(labelGif);
+    } catch (NullPointerException e) {
+        System.out.println("GIF no encontrado");
     }
+
+ 
+    try {
+        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
+    } catch (NullPointerException e) {
+        System.out.println("Imagen no encontrada");
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,24 +70,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         fondo = new javax.swing.JLabel();
+        Acelerar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/AutoDentro.jpg"))); // NOI18N
+
+        Acelerar.setBackground(new java.awt.Color(0, 153, 51));
+        Acelerar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Acelerar.setText("Acelerar");
+        Acelerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AcelerarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Acelerar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(fondo)
                 .addGap(0, 10, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(255, 255, 255)
+                .addComponent(Acelerar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -82,8 +124,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
+         try {
+        int velocidadAcelerar = 30; 
+
+        vehiculo.acelerar(velocidadAcelerar);
+        eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
+
+        // Mostrar velocidad en pantalla
+        etiquetaVelocidad.setText("Velocidad actual: " + vehiculo.getVelocidadActual() + " km/h");
+
+        
+        if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
+            labelGif.setVisible(true); 
+            eventos.add("⚠️ Se superó la velocidad permitida. ¡Peligro de accidente!");
+        } else {
+            labelGif.setVisible(false); 
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        eventos.add("❌ Error al acelerar: " + e.getMessage());
+    }
+    }//GEN-LAST:event_AcelerarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton Acelerar;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
