@@ -108,4 +108,5 @@ public class Vehiculo {
         velocidadActual = Math.max(0, velocidadActual - cantidad);
         return "Vehiculo frenado a " + velocidadActual+ " km/h.";
     }
+      
 }
