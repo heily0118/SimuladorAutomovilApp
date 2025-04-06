@@ -9,6 +9,7 @@ import autonoma.simuladorautomovil.exceptions.PatinajeException;
 import autonoma.simuladorautomovil.exceptions.TerrenoIrregularException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
+import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
 import autonoma.simuladorautomovil.models.LlantaBuena;
 import autonoma.simuladorautomovil.models.Motor;
 import javax.swing.ImageIcon;
@@ -211,7 +212,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -408,12 +409,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
         );
@@ -422,8 +422,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
-                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -433,10 +433,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,18 +480,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
         try {
-        vehiculo.encender();  
+            vehiculo.encender();  
 
-        eventos.add("Vehículo encendido correctamente."); 
+            eventos.add("Vehículo encendido correctamente."); 
 
-        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-        estadoAuto.setText("Encendido");
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+            estadoAuto.setText("Encendido");
+            
+            EncenderCarro encender = new EncenderCarro(this, true);
+            encender.setVisible(true);
+            JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
 
-     
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error al encender: " + e.getMessage());
-    }
+        } catch (VehiculoEncendidoException vee) {
+            eventos.add("Intento de encender: " + vee.getMessage());
+            JOptionPane.showMessageDialog(this, vee.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            eventos.add("Error general al encender: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_EncenderActionPerformed
 
     private void estadoAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoAutoActionPerformed
