@@ -470,6 +470,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
             eventos.add("Se alcanzó la velocidad permitida. ¡Peligro de accidente!");
+            
+            
+            reproducirSonidoChoque();
+
             try {
                 ChoqueCarro choque = new ChoqueCarro(this, true);
                 choque.setVisible(true);
@@ -637,6 +641,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VerificarEstadoLlantasActionPerformed
 
+private void reproducirSonidoChoque() {
+    try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/autonoma/simuladorautomovil/sounds/audioChoque.wav"));
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido: " + e.getMessage());
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Acelerar;
