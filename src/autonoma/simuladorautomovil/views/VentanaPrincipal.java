@@ -47,22 +47,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal(Vehiculo vehiculo) {
-    initComponents();
-    setSize(1100, 900);
-    setResizable(false);
-    this.setLocationRelativeTo(null);
+        initComponents();
+        setSize(1100, 900);
+        setResizable(false);
+        this.setLocationRelativeTo(null);
 
-    this.vehiculo = vehiculo;
-    this.eventos = new ArrayList<>();
+        this.vehiculo = vehiculo;
+        this.eventos = new ArrayList<>();
 
    
 
-    try {
-        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
-    } catch (NullPointerException e) {
-        System.out.println("Imagen no encontrada");
+        try {
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
+        } catch (NullPointerException e) {
+            System.out.println("Imagen no encontrada");
+        }
     }
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -509,35 +509,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
        try {
-        int velocidadAcelerar = 10; 
-        int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
-        int velocidadActual = vehiculo.getVelocidadActual();
+            int velocidadAcelerar = 10; 
+            int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
+            int velocidadActual = vehiculo.getVelocidadActual();
 
-        if (velocidadActual < velocidadMaxima) {
-            vehiculo.acelerar(velocidadAcelerar);
-            reproducirSonidoAceleracion();
-            eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
-            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-            System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
-        }
-
-        if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
-            eventos.add("Se alcanzó la velocidad permitida. ¡Peligro de accidente!");
-            reproducirSonidoChoque(); 
-
-            try {
-                ChoqueCarro choque = new ChoqueCarro(this, true);
-                choque.setVisible(true);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error al mostrar el diálogo: " + ex.getMessage());
-                ex.printStackTrace();
+            if (velocidadActual < velocidadMaxima) {
+                vehiculo.acelerar(velocidadAcelerar);
+                reproducirSonidoAceleracion();
+                eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
+                Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+                System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
             }
-        }
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error al acelerar: " + e.getMessage());
-    }
+            if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
+                eventos.add("Se alcanzó la velocidad permitida. ¡Peligro de accidente!");
+                reproducirSonidoChoque(); 
+
+                try {
+                    ChoqueCarro choque = new ChoqueCarro(this, true);
+                    choque.setVisible(true);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al mostrar el diálogo: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            eventos.add("Error al acelerar: " + e.getMessage());
+        }
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
@@ -607,28 +607,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_apagarActionPerformed
 
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
-       try {
+        try {
        
-        String input = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea disminuir de velocidad:");
+            String input = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea disminuir de velocidad:");
         
        
-        if (input == null) {
-            return; 
-        }
+            if (input == null) {
+                return; 
+            }
 
        
-        int cantidadFrenar = Integer.parseInt(input);
+            int cantidadFrenar = Integer.parseInt(input);
 
     
-        vehiculo.frenar(cantidadFrenar);
+            vehiculo.frenar(cantidadFrenar);
 
     
-        eventos.add("Freno a " + vehiculo.getVelocidadActual() + " km/h");
-        Velocidad.setText( vehiculo.getVelocidadActual() + " km/h");
+            eventos.add("Freno a " + vehiculo.getVelocidadActual() + " km/h");
+            Velocidad.setText( vehiculo.getVelocidadActual() + " km/h");
 
-      
-  
-        
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
@@ -638,35 +635,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_frenarActionPerformed
 
     private void FrenarBruscamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrenarBruscamenteActionPerformed
-       try {
-        int cantidadFrenar = vehiculo.getVelocidadActual(); 
-        String resultado = vehiculo.frenarAutoBruscamente(cantidadFrenar);
+        try {
+            int cantidadFrenar = vehiculo.getVelocidadActual(); 
+            String resultado = vehiculo.frenarAutoBruscamente(cantidadFrenar);
 
-        reproducirSonidoFrenadoBrusco(); 
+            reproducirSonidoFrenadoBrusco(); 
 
-        eventos.add("Frenado brusco: " + resultado);
-        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+            eventos.add("Frenado brusco: " + resultado);
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
 
-        JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
 
-    } catch (VehiculoApagadoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        eventos.add("Intento de frenado brusco con el vehículo apagado.");
-    } catch (VehiculoDetenidoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        eventos.add("Intento de frenado brusco estando detenido.");
-    } catch (PatinajeException e) {
-        reproducirSonidoChoque(); 
+        } catch (VehiculoApagadoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            eventos.add("Intento de frenado brusco con el vehículo apagado.");
+        } catch (VehiculoDetenidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            eventos.add("Intento de frenado brusco estando detenido.");
+        } catch (PatinajeException e) {
+            reproducirSonidoChoque(); 
 
-        ChoqueCarro choque = new ChoqueCarro(this, true);
-        choque.setVisible(true);
+            ChoqueCarro choque = new ChoqueCarro(this, true);
+            choque.setVisible(true);
 
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        eventos.add("¡Frenado brusco fallido! El vehículo patinó.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error desconocido", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error inesperado al frenar bruscamente: " + e.getMessage());
-    }
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            eventos.add("¡Frenado brusco fallido! El vehículo patinó.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error desconocido", JOptionPane.ERROR_MESSAGE);
+            eventos.add("Error inesperado al frenar bruscamente: " + e.getMessage());
+        }
 
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
 
