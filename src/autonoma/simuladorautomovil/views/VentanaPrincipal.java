@@ -448,22 +448,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
         try {
-        int velocidadAcelerar = 30; 
-
+        int velocidadAcelerar = 10; 
         vehiculo.acelerar(velocidadAcelerar);
         eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
-
-       
         Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
 
-       
-        if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
-           ChoqueCarro choque = new ChoqueCarro(this,true);
-           
-           choque.setVisible(true);
-            eventos.add("Se superó la velocidad permitida. ¡Peligro de accidente!");
+        System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
+        System.out.println("Velocidad máxima: " + vehiculo.getLlantas().getVelocidadMaxima());
+
+        if (vehiculo.getVelocidadActual() >= vehiculo.getLlantas().getVelocidadMaxima()) {
+            try {
+                ChoqueCarro choque = new ChoqueCarro(this, true);
+                eventos.add("Se superó la velocidad permitida. ¡Peligro de accidente!");
+                choque.setVisible(true);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al mostrar el diálogo: " + ex.getMessage());
+                ex.printStackTrace();
+            }
         } else {
-            System.out.println("EStas bien");
+            System.out.println("Estás bien");
         }
 
     } catch (Exception e) {
