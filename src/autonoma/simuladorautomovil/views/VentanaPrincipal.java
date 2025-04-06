@@ -643,7 +643,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 private void reproducirSonidoChoque() {
     try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/autonoma/simuladorautomovil/sounds/audioChoque.wav"));
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/autonoma/simuladorautomovil/sounds/videoChoque.wav"));
         Clip clip = AudioSystem.getClip();
         clip.open(audioInputStream);
         clip.start();
