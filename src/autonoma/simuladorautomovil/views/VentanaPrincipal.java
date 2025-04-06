@@ -35,7 +35,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal(Vehiculo vehiculo) {
     initComponents();
-    setSize(1000, 600);
+    setSize(1100, 600);
     setResizable(false);
     this.setLocationRelativeTo(null);
 
@@ -71,6 +71,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         frenar = new javax.swing.JToggleButton();
         FrenarBruscamente = new javax.swing.JToggleButton();
+        VerificarEstadoLlantas = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -178,25 +179,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        VerificarEstadoLlantas.setBackground(new java.awt.Color(0, 102, 204));
+        VerificarEstadoLlantas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        VerificarEstadoLlantas.setText("Verificar estado de llantas");
+        VerificarEstadoLlantas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerificarEstadoLlantasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FrenarBruscamente)
-                    .addComponent(frenar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(VerificarEstadoLlantas)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(FrenarBruscamente)
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(frenar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(frenar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(166, 166, 166)
+                .addGap(181, 181, 181)
+                .addComponent(frenar)
+                .addGap(36, 36, 36)
                 .addComponent(FrenarBruscamente)
-                .addContainerGap(562, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(VerificarEstadoLlantas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -220,7 +238,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(choqueCarro)
                 .addGap(58, 58, 58))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,12 +395,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
 
+    private void VerificarEstadoLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarEstadoLlantasActionPerformed
+        try {
+            String estado = vehiculo.verificarDesgasteLlanta();
+            JOptionPane.showMessageDialog(this, estado, "Estado de Llantas", JOptionPane.INFORMATION_MESSAGE);
+            eventos.add("Verificación de llantas: " + estado);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al verificar llantas", "Error", JOptionPane.ERROR_MESSAGE);
+            eventos.add("Error al verificar llantas: " + e.getMessage());
+        }
+    }//GEN-LAST:event_VerificarEstadoLlantasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Acelerar;
     private javax.swing.JToggleButton Encender;
     private javax.swing.JToggleButton FrenarBruscamente;
     private javax.swing.JTextField Velocidad;
+    private javax.swing.JToggleButton VerificarEstadoLlantas;
     private javax.swing.JToggleButton apagar;
     private javax.swing.JLabel choqueCarro;
     private javax.swing.JTextField estadoAuto;
