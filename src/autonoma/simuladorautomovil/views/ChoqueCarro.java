@@ -22,11 +22,11 @@ public class ChoqueCarro extends javax.swing.JDialog {
          setResizable(false);
          this.setLocationRelativeTo(null); 
          
-          try {
-        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
-    } catch (NullPointerException e) {
-        System.out.println("Imagen no encontrada");
-    }
+        try {
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
+        } catch (NullPointerException e) {
+            System.out.println("Imagen no encontrada");
+        }
     }
 
     /**

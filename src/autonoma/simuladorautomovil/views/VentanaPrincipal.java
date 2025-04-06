@@ -531,24 +531,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_estadoAutoActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
-       try {
-        vehiculo.apagar();
+        try {
+            vehiculo.apagar();
 
-        eventos.add("Vehículo apagado correctamente.");
+            eventos.add("Vehículo apagado correctamente.");
 
        
-        estadoAuto.setText(" Apagado");
-         Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
+            estadoAuto.setText(" Apagado");
+            Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
 
       
 
       
-        JOptionPane.showMessageDialog(this, "El vehículo se ha apagado exitosamente.", "Apagado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El vehículo se ha apagado exitosamente.", "Apagado", JOptionPane.INFORMATION_MESSAGE);
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error al apagar: " + e.getMessage());
-    }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
+            eventos.add("Error al apagar: " + e.getMessage());
+        }
     }//GEN-LAST:event_apagarActionPerformed
 
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
@@ -574,12 +574,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
       
   
         
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error al frenar: " + e.getMessage());
-    }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            eventos.add("Error al frenar: " + e.getMessage());
+        }
     }//GEN-LAST:event_frenarActionPerformed
 
     private void FrenarBruscamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrenarBruscamenteActionPerformed
