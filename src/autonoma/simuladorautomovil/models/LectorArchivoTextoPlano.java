@@ -29,7 +29,7 @@ public class LectorArchivoTextoPlano implements Lector {
     private Charset charset = Charset.forName("UTF-8");
     
     
-    ////////////////////////////////////////////////////////////////////////
+   
     /**
      * Contructor de la clase
      */
@@ -37,7 +37,7 @@ public class LectorArchivoTextoPlano implements Lector {
         this.archivo = new ArrayList<>();
     }
 
-    /////////////////////////////////////////////////////////////////////////
+ 
     /**
      * Lee el archivo de texto dónde tenemos el programa que deseamos interpretar
      *
@@ -64,7 +64,7 @@ public class LectorArchivoTextoPlano implements Lector {
         reader.close();
         return this.archivo;
     }
-    ///////////////////////////////////////////////////////////////////////////
+
     /**
      * Agrega lineas al Arraylist en el cual le guarda el archivo
      *
@@ -74,7 +74,7 @@ public class LectorArchivoTextoPlano implements Lector {
         archivo.add(linea);
     }
     
-    //////////////////////////////////////////////////////////////////////////
+ 
     /**
      * Limpia el archivo de posiciones en blanco
      * @param texto 
