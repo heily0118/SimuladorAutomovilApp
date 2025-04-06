@@ -695,50 +695,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        eventos.add("¡Piiip piiip!");
     }//GEN-LAST:event_PitoActionPerformed
 
-private void reproducirSonidoChoque() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/autonoma/simuladorautomovil/sounds/videoChoque.wav"));
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido: " + e.getMessage());
+    private void reproducirSonidoChoque() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/autonoma/simuladorautomovil/sounds/videoChoque.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido: " + e.getMessage());
+        }
     }
-}
-private void reproducirSonidoFrenadoBrusco() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-            getClass().getResource("/autonoma/simuladorautomovil/sounds/frenoBrusco.wav"));
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido del frenado: " + e.getMessage());
+    
+    private void reproducirSonidoFrenadoBrusco() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                getClass().getResource("/autonoma/simuladorautomovil/sounds/frenoBrusco.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido del frenado: " + e.getMessage());
+        }
     }
-}
 
-private void reproducirSonidoAceleracion() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-            getClass().getResource("/autonoma/simuladorautomovil/sounds/aceleracion.wav"));
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de aceleración: " + e.getMessage());
+    private void reproducirSonidoAceleracion() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                getClass().getResource("/autonoma/simuladorautomovil/sounds/aceleracion.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de aceleración: " + e.getMessage());
+        }
     }
-}
-private void reproducirSonidoPito() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-            getClass().getResource("/autonoma/simuladorautomovil/sounds/pito.wav"));
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de pito: " + e.getMessage());
+    
+    private void reproducirSonidoPito() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                getClass().getResource("/autonoma/simuladorautomovil/sounds/pito.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de pito: " + e.getMessage());
+        }
     }
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Acelerar;
     private javax.swing.JToggleButton Encender;
