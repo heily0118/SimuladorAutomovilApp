@@ -13,10 +13,18 @@ package autonoma.simuladorautomovil.models;
  */
 public class LlantaBarata extends Llanta {
 
+    /**
+     * Constructor de la subclase LlantaBarata.
+     */
     public LlantaBarata() {
         super(50); 
     }
 
+    /**
+     * Aumenta el desgaste de la llanta según la velocidad del vehículo, lo que
+     * quiere decir que cuanto mayor sea la velocidad, mayor será el desgaste.
+     * @param velocidad Es la velocidad actual del vehículo.
+     */
     @Override
     public void aumentarDesgastePorUso(int velocidad) {
        
@@ -29,6 +37,10 @@ public class LlantaBarata extends Llanta {
         }
     }
 
+    /**
+     * Verifica el estado actual del desgaste de la llanta barata y devuelve un mensaje descriptivo.
+     * @return Retorna un mensaje con la descripción del estado de la llanta.
+     */
     @Override
     public String verificarDesgaste() {
         int d = getDesgaste();
