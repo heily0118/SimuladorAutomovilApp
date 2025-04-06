@@ -548,36 +548,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_frenarActionPerformed
 
     private void FrenarBruscamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrenarBruscamenteActionPerformed
-       try {
+        try {
        
-        int cantidadFrenar = vehiculo.getVelocidadActual(); 
+            int cantidadFrenar = vehiculo.getVelocidadActual(); 
 
         
-        String resultado = vehiculo.frenarAutoBruscamente(cantidadFrenar);
+            String resultado = vehiculo.frenarAutoBruscamente(cantidadFrenar);
 
        
-        eventos.add("Frenado brusco: " + resultado);
-        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+            eventos.add("Frenado brusco: " + resultado);
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
         
 
-        JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
 
-    } catch (VehiculoApagadoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        eventos.add("Intento de frenado brusco con el vehículo apagado.");
-    } catch (VehiculoDetenidoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        eventos.add("Intento de frenado brusco estando detenido.");
-    } catch (PatinajeException e) {
-         ChoqueCarro choque = new ChoqueCarro(this,true);
+        } catch (VehiculoApagadoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            eventos.add("Intento de frenado brusco con el vehículo apagado.");
+        } catch (VehiculoDetenidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            eventos.add("Intento de frenado brusco estando detenido.");
+        } catch (PatinajeException e) {
+            ChoqueCarro choque = new ChoqueCarro(this,true);
            
-           choque.setVisible(true);
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        eventos.add("¡Frenado brusco fallido! El vehículo patinó.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error desconocido", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error inesperado al frenar bruscamente: " + e.getMessage());
-    }
+            choque.setVisible(true);
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            eventos.add("¡Frenado brusco fallido! El vehículo patinó.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error desconocido", JOptionPane.ERROR_MESSAGE);
+            eventos.add("Error inesperado al frenar bruscamente: " + e.getMessage());
+        }
 
 
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
