@@ -47,17 +47,39 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="Acelerar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="76" max="32767" attributes="0"/>
                   <Component id="fondo" min="-2" pref="591" max="-2" attributes="0"/>
+
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="Encender" min="-2" pref="109" max="-2" attributes="0"/>
+                      <Component id="Acelerar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="fondo" min="-2" pref="1007" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+=======
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="fondo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
+                  <Component id="Encender" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+>>>>>>> ae338a0344d0a822a70054e5adbe87a3b56ca345
                   <Component id="Acelerar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
@@ -79,12 +101,26 @@
               <Color blue="33" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
+              <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Acelerar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AcelerarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="Encender">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="66" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Encender"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EncenderActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
