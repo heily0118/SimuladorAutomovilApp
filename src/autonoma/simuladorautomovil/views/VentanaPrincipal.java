@@ -290,7 +290,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_estadoAutoActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
-        // TODO add your handling code here:
+       try {
+        vehiculo.apagar();
+
+        eventos.add("Vehículo apagado correctamente.");
+
+       
+        estadoAuto.setText(" Apagado");
+         Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
+
+       
+        labelGif.setVisible(false);
+
+      
+        JOptionPane.showMessageDialog(this, "El vehículo se ha apagado exitosamente.", "Apagado", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
+        eventos.add("Error al apagar: " + e.getMessage());
+    }
     }//GEN-LAST:event_apagarActionPerformed
 
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
@@ -327,14 +345,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void FrenarBruscamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrenarBruscamenteActionPerformed
        try {
        
-        int cantidadFrenar = vehiculo.getVelocidadActual(); // frenado total
+        int cantidadFrenar = vehiculo.getVelocidadActual(); 
 
         
         String resultado = vehiculo.frenarAutoBruscamente(cantidadFrenar);
 
        
         eventos.add("Frenado brusco: " + resultado);
-        Velocidad.setText("Velocidad actual: " + vehiculo.getVelocidadActual() + " km/h");
+        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
         labelGif.setVisible(false);
 
         JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
