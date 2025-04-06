@@ -688,7 +688,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_VerificarEstadoLlantasActionPerformed
 
     private void PitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PitoActionPerformed
-        // TODO add your handling code here:
+       reproducirSonidoPito();
+       eventos.add("¡Piiip piiip!");
     }//GEN-LAST:event_PitoActionPerformed
 
 private void reproducirSonidoChoque() {
@@ -722,6 +723,17 @@ private void reproducirSonidoAceleracion() {
         clip.start();
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de aceleración: " + e.getMessage());
+    }
+}
+private void reproducirSonidoPito() {
+    try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+            getClass().getResource("/autonoma/simuladorautomovil/sounds/pito.wav"));
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de pito: " + e.getMessage());
     }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
