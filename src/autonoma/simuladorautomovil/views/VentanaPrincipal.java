@@ -24,7 +24,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    private Vehiculo vehiculo;
    private ArrayList<String> eventos = new ArrayList<>();
   
-   private JLabel labelGif;
+ 
   
 
     /**
@@ -39,15 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     this.vehiculo = vehiculo;
     this.eventos = new ArrayList<>();
 
-    
-    try {
-        labelGif = new JLabel(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/ChoqueCarro.gif")));
-        labelGif.setBounds(400, 400, 200, 150); 
-        labelGif.setVisible(false); 
-        add(labelGif);
-    } catch (NullPointerException e) {
-        System.out.println("GIF no encontrado");
-    }
+    choqueCarro.setVisible(false);
 
     try {
         this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
@@ -72,6 +64,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         apagar = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         fondo = new javax.swing.JLabel();
+        choqueCarro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         frenar = new javax.swing.JToggleButton();
         FrenarBruscamente = new javax.swing.JToggleButton();
@@ -161,6 +154,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/AutoDentro.jpg"))); // NOI18N
 
+        choqueCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/ChoqueCarro.gif"))); // NOI18N
+        choqueCarro.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,13 +165,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(choqueCarro)
+                .addGap(201, 201, 201))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(choqueCarro)
+                .addGap(58, 58, 58))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -251,15 +253,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vehiculo.acelerar(velocidadAcelerar);
         eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
 
-        // Actualiza el JTextField en lugar del JLabel no inicializado
+       
         Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
 
-        // Verifica si se superó la velocidad de las llantas
+       
         if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
-            labelGif.setVisible(true); 
+            choqueCarro.setVisible(true); 
             eventos.add("Se superó la velocidad permitida. ¡Peligro de accidente!");
         } else {
-            labelGif.setVisible(false); 
+            choqueCarro.setVisible(false); 
         }
 
     } catch (Exception e) {
@@ -277,7 +279,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
         estadoAuto.setText("Encendido");
 
-        labelGif.setVisible(false); 
+        choqueCarro.setVisible(false); 
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -300,7 +302,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
          Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
 
        
-        labelGif.setVisible(false);
+        choqueCarro.setVisible(false);
 
       
         JOptionPane.showMessageDialog(this, "El vehículo se ha apagado exitosamente.", "Apagado", JOptionPane.INFORMATION_MESSAGE);
@@ -328,11 +330,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vehiculo.frenar(cantidadFrenar);
 
     
-        eventos.add("Frenó a " + vehiculo.getVelocidadActual() + " km/h");
+        eventos.add("Freno a " + vehiculo.getVelocidadActual() + " km/h");
         Velocidad.setText( vehiculo.getVelocidadActual() + " km/h");
 
       
-        labelGif.setVisible(false);
+        choqueCarro.setVisible(false);
         
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
@@ -353,7 +355,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        
         eventos.add("Frenado brusco: " + resultado);
         Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-        labelGif.setVisible(false);
+        choqueCarro.setVisible(false);
 
         JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
 
@@ -364,7 +366,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, e.getMessage());
         eventos.add("Intento de frenado brusco estando detenido.");
     } catch (PatinajeException e) {
-        labelGif.setVisible(true); 
+        choqueCarro.setVisible(true); 
         JOptionPane.showMessageDialog(this, e.getMessage());
         eventos.add("¡Frenado brusco fallido! El vehículo patinó.");
     } catch (Exception e) {
@@ -382,6 +384,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton FrenarBruscamente;
     private javax.swing.JTextField Velocidad;
     private javax.swing.JToggleButton apagar;
+    private javax.swing.JLabel choqueCarro;
     private javax.swing.JTextField estadoAuto;
     private javax.swing.JLabel fondo;
     private javax.swing.JToggleButton frenar;
