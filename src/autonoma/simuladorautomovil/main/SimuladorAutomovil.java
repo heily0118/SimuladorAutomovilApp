@@ -34,11 +34,11 @@ public class SimuladorAutomovil {
 
         try {
             LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano();
-            ArrayList<String> lineas = lector.leer("C:\\Heily\\SimuladorAutomovil\\config.csv");
+            ArrayList<String> lineas = lector.leer("config.csv");
 
             if (!lineas.isEmpty()) {
                 String[] partes = lineas.get(0).split(";");
-                tipoLlanta = partes[1].trim();  // Asumiendo: "llantas;Bonitas"
+                tipoLlanta = partes[1].trim();  
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo de configuración está vacío.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -74,7 +74,7 @@ public class SimuladorAutomovil {
             return;
         }
 
-        // ✅ Mostrar la ventana DESPUÉS de tener el vehículo listo
+      
         VentanaPrincipal ventana = new VentanaPrincipal(vehiculo);
         ventana.setVisible(true);
 
@@ -96,7 +96,7 @@ public class SimuladorAutomovil {
         }
 
         try {
-            EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("C:\\Heily\\SimuladorAutomovil\\eventos.txt");
+            EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("config.csv");
             escritor.escribir(eventos);
             System.out.println("Eventos guardados.");
         } catch (Exception e) {
