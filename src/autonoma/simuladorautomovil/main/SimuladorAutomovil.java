@@ -66,18 +66,18 @@ public class SimuladorAutomovil {
             return;
         }
 
-        // Crear el vehículo
+    
         try {
             Llanta llanta;
             switch (tipoLlanta) {
                 case "Buenas":
-                    llanta = new LlantaBuena(110);
+                    llanta = new LlantaBuena();
                     break;
                 case "Bonitas":
-                    llanta = new LlantaBonita(70);
+                    llanta = new LlantaBonita();
                     break;
                 case "Baratas":
-                    llanta = new LlantaBarata(50);
+                    llanta = new LlantaBarata();
                     break;
                 default:
                     throw new ErrorEnArchivoConfiguracionException();
