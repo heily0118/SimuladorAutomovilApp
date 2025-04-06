@@ -20,9 +20,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
    private Vehiculo vehiculo;
    private ArrayList<String> eventos = new ArrayList<>();
-   private JLabel etiquetaVelocidad;
+  
    private JLabel labelGif;
-   private JLabel etiquetaEstado;
+  
 
     /**
      * Creates new form VentanaPrincipal
@@ -36,14 +36,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     this.vehiculo = vehiculo;
     this.eventos = new ArrayList<>();
 
-    etiquetaVelocidad = new JLabel("Velocidad actual: 0 km/h");
-    etiquetaVelocidad.setBounds(20, 500, 300, 30); 
-    add(etiquetaVelocidad);
     
-    etiquetaEstado = new JLabel("Estado: Apagado");
-    etiquetaEstado.setBounds(20, 530, 300, 30);
-    add(etiquetaEstado);
-
     try {
         labelGif = new JLabel(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/ChoqueCarro.gif")));
         labelGif.setBounds(400, 400, 200, 150); 
@@ -70,8 +63,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         fondo = new javax.swing.JLabel();
-        Acelerar = new javax.swing.JToggleButton();
+        jPanel2 = new javax.swing.JPanel();
         Encender = new javax.swing.JToggleButton();
+        Acelerar = new javax.swing.JToggleButton();
+        estadoAuto = new javax.swing.JTextField();
+        Velocidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,14 +75,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/AutoDentro.jpg"))); // NOI18N
 
-        Acelerar.setBackground(new java.awt.Color(0, 153, 51));
-        Acelerar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Acelerar.setText("Acelerar");
-        Acelerar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AcelerarActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         Encender.setBackground(new java.awt.Color(204, 102, 0));
         Encender.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -97,55 +103,79 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(Acelerar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-            )
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Encender, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Acelerar)
-                .addGap(0, 0, Short.MAX_VALUE)
-            )
+        Acelerar.setBackground(new java.awt.Color(0, 153, 51));
+        Acelerar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Acelerar.setText("Acelerar");
+        Acelerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AcelerarActionPerformed(evt);
+            }
+        });
+
+        estadoAuto.setEditable(false);
+        estadoAuto.setBackground(new java.awt.Color(255, 255, 255));
+        estadoAuto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        estadoAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoAutoActionPerformed(evt);
+            }
+        });
+
+        Velocidad.setEditable(false);
+        Velocidad.setBackground(new java.awt.Color(255, 255, 255));
+        Velocidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(estadoAuto, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(Velocidad)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Encender, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Acelerar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
-        
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(fondo)
-                .addGap(0, 10, Short.MAX_VALUE)
-            )
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(estadoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
                 .addComponent(Encender)
-                .addGap(37, 37, 37)
+                .addGap(90, 90, 90)
                 .addComponent(Acelerar)
-                .addGap(0, 0, Short.MAX_VALUE)
-            )
-            .addComponent(fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 558, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -153,50 +183,57 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
         try {
-            int velocidadAcelerar = 30; 
+        int velocidadAcelerar = 30; 
 
-            vehiculo.acelerar(velocidadAcelerar);
-            eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
+        vehiculo.acelerar(velocidadAcelerar);
+        eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
 
-       
-            etiquetaVelocidad.setText("Velocidad actual: " + vehiculo.getVelocidadActual() + " km/h");
+        // Actualiza el JTextField en lugar del JLabel no inicializado
+        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
 
-        
-            if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
-                labelGif.setVisible(true); 
-                eventos.add(" Se superó la velocidad permitida. ¡Peligro de accidente!");
-            } else {
-                labelGif.setVisible(false); 
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            eventos.add(" Error al acelerar: " + e.getMessage());
+        // Verifica si se superó la velocidad de las llantas
+        if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
+            labelGif.setVisible(true); 
+            eventos.add("Se superó la velocidad permitida. ¡Peligro de accidente!");
+        } else {
+            labelGif.setVisible(false); 
         }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        eventos.add("Error al acelerar: " + e.getMessage());
+    }
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
         try {
-            vehiculo.encender();  
+        vehiculo.encender();  
 
-            eventos.add("Vehículo encendido correctamente."); 
+        eventos.add("Vehículo encendido correctamente."); 
 
-            etiquetaVelocidad.setText("Velocidad actual: " + vehiculo.getVelocidadActual() + " km/h");
-            etiquetaEstado.setText("Estado: Encendido"); 
+        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+        estadoAuto.setText("Encendido");
 
-            labelGif.setVisible(false); 
+        labelGif.setVisible(false); 
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            eventos.add("Error al encender: " + e.getMessage());
-        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        eventos.add("Error al encender: " + e.getMessage());
+    }
     }//GEN-LAST:event_EncenderActionPerformed
+
+    private void estadoAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoAutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estadoAutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Acelerar;
     private javax.swing.JToggleButton Encender;
+    private javax.swing.JTextField Velocidad;
+    private javax.swing.JTextField estadoAuto;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
