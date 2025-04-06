@@ -30,28 +30,45 @@ public class SimuladorAutomovil {
     public static void main(String[] args) {
         ArrayList<String> eventos = new ArrayList<>();
         Vehiculo vehiculo = null;
-        String tipoLlanta = null;
 
+       
+        String tipoLlanta = null;
+        int potenciaMotor = 0;
+        String cilindrajeMotor = "";
+
+       
         try {
             LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano();
             ArrayList<String> lineas = lector.leer("config.csv");
 
-            if (!lineas.isEmpty()) {
-                String[] partes = lineas.get(0).split(";");
-                tipoLlanta = partes[1].trim();  
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "El archivo de configuración está vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+            for (String linea : lineas) {
+                String[] partes = linea.split(";");
+                if (partes.length == 2) {
+                    String clave = partes[0].trim().toLowerCase();
+                    String valor = partes[1].trim();
+
+                    if (clave.equals("llantas")) {
+                        tipoLlanta = valor;
+                    } else if (clave.equals("motor")) {
+                        cilindrajeMotor = valor + " c";
+                        potenciaMotor = Integer.parseInt(valor);
+                    }
+                }
+            }
+
+            if (tipoLlanta == null || cilindrajeMotor.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Archivo de configuración incompleto.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error leyendo archivo de configuración: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error leyendo archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Crear el vehículo
         try {
             Llanta llanta;
-
             switch (tipoLlanta) {
                 case "Buenas":
                     llanta = new LlantaBuena(110);
@@ -66,22 +83,25 @@ public class SimuladorAutomovil {
                     throw new ErrorEnArchivoConfiguracionException();
             }
 
-            Motor motor = new Motor("2000 c", 1000);
+            Motor motor = new Motor(cilindrajeMotor, potenciaMotor);
             vehiculo = new Vehiculo(llanta, motor);
-            eventos.add("Vehículo creado con llantas " + tipoLlanta + " y motor de " + motor.getCilindraje() + " cc.");
+
+            eventos.add("Vehículo creado con llantas: " + tipoLlanta);
+            eventos.add("Motor: " + cilindrajeMotor + ", Potencia: " + potenciaMotor + " HP");
 
         } catch (ErrorEnArchivoConfiguracionException e) {
-            JOptionPane.showMessageDialog(null, "Simulación finalizada correctamente.");
+            JOptionPane.showMessageDialog(null, "Error en configuración: llantas inválidas.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-      
+     
         VentanaPrincipal ventana = new VentanaPrincipal(vehiculo);
         ventana.setVisible(true);
 
+       
         try {
             vehiculo.encender();
-            eventos.add("Encendido correctamente.");
+            eventos.add("Vehículo encendido.");
 
             vehiculo.acelerar(50);
             eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h.");
@@ -90,12 +110,14 @@ public class SimuladorAutomovil {
             eventos.add("Frenó a " + vehiculo.getVelocidadActual() + " km/h.");
 
             vehiculo.apagar();
-            eventos.add("Apagado correctamente.");
+            eventos.add("Vehículo apagado.");
+
         } catch (Exception e) {
             eventos.add("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
 
+   
         try {
             EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("eventos.txt");
             escritor.escribir(eventos);
