@@ -14,7 +14,14 @@ import autonoma.simuladorautomovil.models.LlantaBuena;
 import autonoma.simuladorautomovil.models.Motor;
 import javax.swing.ImageIcon;
 import autonoma.simuladorautomovil.models.Vehiculo;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -486,9 +493,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
             estadoAuto.setText("Encendido");
-            
+
+            new Thread(() -> {
+            try {
+                URL sonidoURL = getClass().getResource("/autonoma/simuladorautomovil/sounds/EncenderAuto.wav");
+
+                if (sonidoURL == null) {
+                    throw new RuntimeException("No se encontró el archivo de sonido.");
+                }
+
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonidoURL);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            }).start();
+
             EncenderCarro encender = new EncenderCarro(this, true);
             encender.setVisible(true);
+
             JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (VehiculoEncendidoException vee) {
