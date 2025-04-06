@@ -66,7 +66,7 @@ public class SimuladorAutomovil {
             return;
         }
 
-        // Crear el vehículo
+    
         try {
             Llanta llanta;
             switch (tipoLlanta) {

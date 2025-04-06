@@ -123,7 +123,7 @@ public class Vehiculo {
             throw new VehiculoDetenidoException();
         }
 
-        // Verificamos si el frenado es brusco
+      
         if (cantidad > 30) {
             if (velocidadActual > llantas.getVelocidadMaxima()) {
                 patinando = true;
