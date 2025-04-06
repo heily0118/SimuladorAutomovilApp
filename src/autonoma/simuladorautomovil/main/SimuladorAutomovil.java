@@ -39,6 +39,7 @@ public class SimuladorAutomovil {
             if (!lineas.isEmpty()) {
                 String[] partes = lineas.get(0).split(";");
                 tipoLlanta = partes[1].trim();  
+                
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo de configuración está vacío.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -96,7 +97,7 @@ public class SimuladorAutomovil {
         }
 
         try {
-            EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("config.csv");
+            EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("eventos.txt");
             escritor.escribir(eventos);
             System.out.println("Eventos guardados.");
         } catch (Exception e) {
