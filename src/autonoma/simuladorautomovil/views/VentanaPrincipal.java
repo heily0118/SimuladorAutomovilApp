@@ -122,27 +122,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
-         try {
-        int velocidadAcelerar = 30; 
+        try {
+            int velocidadAcelerar = 30; 
 
-        vehiculo.acelerar(velocidadAcelerar);
-        eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
+            vehiculo.acelerar(velocidadAcelerar);
+            eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
 
        
-        etiquetaVelocidad.setText("Velocidad actual: " + vehiculo.getVelocidadActual() + " km/h");
+            etiquetaVelocidad.setText("Velocidad actual: " + vehiculo.getVelocidadActual() + " km/h");
 
         
-        if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
-            labelGif.setVisible(true); 
-            eventos.add(" Se superó la velocidad permitida. ¡Peligro de accidente!");
-        } else {
-            labelGif.setVisible(false); 
-        }
+            if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
+                labelGif.setVisible(true); 
+                eventos.add(" Se superó la velocidad permitida. ¡Peligro de accidente!");
+            } else {
+                labelGif.setVisible(false); 
+            }
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        eventos.add(" Error al acelerar: " + e.getMessage());
-    }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            eventos.add(" Error al acelerar: " + e.getMessage());
+        }
     }//GEN-LAST:event_AcelerarActionPerformed
 
 
