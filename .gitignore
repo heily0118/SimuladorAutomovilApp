@@ -1,5 +1,17 @@
+
 nbproject/private/
+
 build/
 dist/
+
 *.class
+
+
 *.jar
+
+
+.DS_Store
+Thumbs.db
+
+
+*~
