@@ -255,7 +255,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/AutoDentro.jpg"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/carroAndando.gif"))); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -408,11 +408,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addContainerGap()
+                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
         );
@@ -421,7 +422,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(62, 62, 62)
+                .addGap(38, 38, 38)
                 .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -449,24 +450,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
         try {
         int velocidadAcelerar = 10; 
-        vehiculo.acelerar(velocidadAcelerar);
-        eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
-        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+        int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
+        int velocidadActual = vehiculo.getVelocidadActual();
 
-        System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
-        System.out.println("Velocidad máxima: " + vehiculo.getLlantas().getVelocidadMaxima());
+        if (velocidadActual < velocidadMaxima) {
+            vehiculo.acelerar(velocidadAcelerar);
+            eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+            System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
+        }
 
-        if (vehiculo.getVelocidadActual() >= vehiculo.getLlantas().getVelocidadMaxima()) {
+        if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
+            eventos.add("Se alcanzó la velocidad permitida. ¡Peligro de accidente!");
             try {
                 ChoqueCarro choque = new ChoqueCarro(this, true);
-                eventos.add("Se superó la velocidad permitida. ¡Peligro de accidente!");
                 choque.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Error al mostrar el diálogo: " + ex.getMessage());
                 ex.printStackTrace();
             }
-        } else {
-            System.out.println("Estás bien");
         }
 
     } catch (Exception e) {
