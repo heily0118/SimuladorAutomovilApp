@@ -24,9 +24,9 @@ public class Motor {
     private int velocidadMaxima;
 
     /**
-     * 
-     * @param cilindraje
-     * @param velocidadMaxima 
+     * Constructor de la clase Motor
+     * @param cilindraje Es el cilindraje del motor.
+     * @param velocidadMaxima Es la velocidad máxima que puede alcanzar el motor.
      */
     public Motor(String cilindraje, int velocidadMaxima) {
         this.cilindraje = cilindraje;
@@ -34,32 +34,32 @@ public class Motor {
     }
 
     /**
-     * 
-     * @return 
+     * Obtiene el cilindraje del motor.
+     * @return Retorna el cilindraje.
      */
     public String getCilindraje() {
         return cilindraje;
     }
 
     /**
-     * 
-     * @param cilindraje 
+     * Establece el cilindraje del motor.
+     * @param cilindraje Es el cilindraje.
      */
     public void setCilindraje(String cilindraje) {
         this.cilindraje = cilindraje;
     }
 
     /**
-     * 
-     * @return 
+     * Obtiene la velocidad máxima que puede alcanzar el motor.
+     * @return Retorna la velocidad máxima en km/h.
      */
     public int getVelocidadMaxima() {
         return velocidadMaxima;
     }
 
     /**
-     * 
-     * @param velocidadMaxima 
+     * Establece la velocidad máxima que puede alcanzar el motor.
+     * @param velocidadMaxima Es la velocidad máxima en km/h.
      */
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
