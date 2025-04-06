@@ -26,22 +26,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
+    public VentanaPrincipal(Vehiculo vehiculo) {
     initComponents();
-    setSize(750, 700);
+    setSize(700, 650);
     setResizable(false);
     this.setLocationRelativeTo(null);
 
-    
-    vehiculo = new Vehiculo(new LlantaBuena(100), new Motor("300 C", 3000));
-    eventos = new ArrayList<>();
+    this.vehiculo = vehiculo;
+    this.eventos = new ArrayList<>();
 
-    
     etiquetaVelocidad = new JLabel("Velocidad actual: 0 km/h");
     etiquetaVelocidad.setBounds(20, 500, 300, 30); 
     add(etiquetaVelocidad);
 
-   
     try {
         labelGif = new JLabel(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/ChoqueCarro.gif")));
         labelGif.setBounds(400, 400, 200, 150); 
@@ -51,14 +48,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println("GIF no encontrado");
     }
 
- 
     try {
         this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
     } catch (NullPointerException e) {
         System.out.println("Imagen no encontrada");
     }
 }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -29,16 +29,20 @@ import javax.swing.JOptionPane;
 public class SimuladorAutomovil {
     public static void main(String[] args) {
 
-        VentanaPrincipal ventana = new VentanaPrincipal();
-        ventana.setVisible(true);   
-
         ArrayList<String> eventos = new ArrayList<>();
         Vehiculo vehiculo = null;
-
         String tipoLlanta = null;
+
         try {
             LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano();
             ArrayList<String> lineas = lector.leer("C:\\Heily\\SimuladorAutomovil\\config.csv");
+           for(String linea : lineas) {
+            String[] partes = linea.split(";");
+            if (partes[0].equalsIgnoreCase("llantas")) {
+            tipoLlanta = partes[1].trim();
+                 }
+         }
+
             if (!lineas.isEmpty()) {
                 tipoLlanta = lineas.get(0).trim();
             } else {
@@ -49,27 +53,25 @@ public class SimuladorAutomovil {
             JOptionPane.showMessageDialog(null, "Error leyendo archivo de configuración: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        try {
-           
 
+        try {
             Llanta llanta;
 
             switch (tipoLlanta) {
                 case "Buenas":
-                    llanta = new LlantaBuena(110); // Asegúrate que este constructor existe
+                    llanta = new LlantaBuena(110);
                     break;
                 case "Bonitas":
-                    llanta = new LlantaBonita(70); // Crea esta clase si no existe
+                    llanta = new LlantaBonita(70); 
                     break;
                 case "Baratas":
-                    llanta = new LlantaBarata(50); // Crea esta clase si no existe
+                    llanta = new LlantaBarata(50); 
                     break;
                 default:
                     throw new ErrorEnArchivoConfiguracionException();
             }
 
-            Motor motor = new Motor("2000 c",1000);
-
+            Motor motor = new Motor("2000 c", 1000);
             vehiculo = new Vehiculo(llanta, motor);
             eventos.add("Vehículo creado con llantas " + tipoLlanta + " y motor de " + motor.getCilindraje() + " cc.");
 
@@ -103,5 +105,9 @@ public class SimuladorAutomovil {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error guardando eventos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+     
+        VentanaPrincipal ventana = new VentanaPrincipal(vehiculo);
+        ventana.setVisible(true);   
     }
 }
