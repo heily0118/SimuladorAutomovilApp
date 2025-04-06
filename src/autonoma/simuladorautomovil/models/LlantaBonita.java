@@ -11,15 +11,39 @@ package autonoma.simuladorautomovil.models;
  * @version 1.0.0
  * 
  */
-public class LlantaBonita extends Llanta{
+public class LlantaBonita extends Llanta {
 
-    public LlantaBonita(int velocidadMaxima) {
-        super(velocidadMaxima);
+    public LlantaBonita() {
+        super(70); 
+    }
+
+    @Override
+    public void aumentarDesgastePorUso(int velocidad) {
+      
+        if (velocidad < getVelocidadMaxima() * 0.8) {
+            aumentarDesgaste(2);
+        } 
+       
+        else if (velocidad <= getVelocidadMaxima()) {
+            aumentarDesgaste(5);
+        } 
+       
+        else {
+            aumentarDesgaste(10);
+        }
     }
 
     @Override
     public String verificarDesgaste() {
-        return "Esta llanta es bonita";
+        int d = getDesgaste();
+        if (d < 30) {
+            return "Llanta bonita en buen estado (" + d + "% desgaste)";
+        } else if (d < 70) {
+            return "Llanta bonita con desgaste moderado (" + d + "% desgaste)";
+        } else if (d < 100) {
+            return "Llanta bonita muy desgastada (" + d + "% desgaste)";
+        } else {
+            return "¡Llanta bonita completamente desgastada! (" + d + "%)";
+        }
     }
-    
 }
