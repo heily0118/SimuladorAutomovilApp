@@ -44,7 +44,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     this.vehiculo = vehiculo;
     this.eventos = new ArrayList<>();
 
-    choqueCarro.setVisible(false);
+   
 
     try {
         this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
@@ -86,8 +86,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        ChoqueCarro = new javax.swing.JPanel();
-        choqueCarro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -402,25 +400,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Simulador de Automóvil App");
 
-        choqueCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/choqueCarro.gif"))); // NOI18N
-
-        javax.swing.GroupLayout ChoqueCarroLayout = new javax.swing.GroupLayout(ChoqueCarro);
-        ChoqueCarro.setLayout(ChoqueCarroLayout);
-        ChoqueCarroLayout.setHorizontalGroup(
-            ChoqueCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ChoqueCarroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(choqueCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        ChoqueCarroLayout.setVerticalGroup(
-            ChoqueCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ChoqueCarroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(choqueCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -431,9 +410,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(106, 106, 106)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(ChoqueCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -444,13 +421,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(ChoqueCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62)
+                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -486,10 +458,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
        
         if (vehiculo.getVelocidadActual() > vehiculo.getLlantas().getVelocidadMaxima()) {
-            choqueCarro.setVisible(true); 
+           ChoqueCarro choque = new ChoqueCarro(this,true);
+           
+           choque.setVisible(true);
             eventos.add("Se superó la velocidad permitida. ¡Peligro de accidente!");
         } else {
-            choqueCarro.setVisible(false); 
+            System.out.println("EStas bien");
         }
 
     } catch (Exception e) {
@@ -507,8 +481,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
         estadoAuto.setText("Encendido");
 
-        choqueCarro.setVisible(false); 
-
+     
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         eventos.add("Error al encender: " + e.getMessage());
@@ -529,8 +502,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         estadoAuto.setText(" Apagado");
          Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
 
-       
-        choqueCarro.setVisible(false);
+      
 
       
         JOptionPane.showMessageDialog(this, "El vehículo se ha apagado exitosamente.", "Apagado", JOptionPane.INFORMATION_MESSAGE);
@@ -562,7 +534,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Velocidad.setText( vehiculo.getVelocidadActual() + " km/h");
 
       
-        choqueCarro.setVisible(false);
+  
         
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
@@ -583,7 +555,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        
         eventos.add("Frenado brusco: " + resultado);
         Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-        choqueCarro.setVisible(false);
+        
 
         JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
 
@@ -594,7 +566,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, e.getMessage());
         eventos.add("Intento de frenado brusco estando detenido.");
     } catch (PatinajeException e) {
-        choqueCarro.setVisible(true); 
+         ChoqueCarro choque = new ChoqueCarro(this,true);
+           
+           choque.setVisible(true);
         JOptionPane.showMessageDialog(this, e.getMessage());
         eventos.add("¡Frenado brusco fallido! El vehículo patinó.");
     } catch (Exception e) {
@@ -628,13 +602,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Acelerar;
-    private javax.swing.JPanel ChoqueCarro;
     private javax.swing.JToggleButton Encender;
     private javax.swing.JToggleButton FrenarBruscamente;
     private javax.swing.JTextField Velocidad;
     private javax.swing.JToggleButton VerificarEstadoLlantas;
     private javax.swing.JToggleButton apagar;
-    private javax.swing.JLabel choqueCarro;
     private javax.swing.JTextField estadoAuto;
     private javax.swing.JLabel fondo;
     private javax.swing.JToggleButton frenar;
