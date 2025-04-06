@@ -28,7 +28,6 @@ import javax.swing.JOptionPane;
  */
 public class SimuladorAutomovil {
     public static void main(String[] args) {
-
         ArrayList<String> eventos = new ArrayList<>();
         Vehiculo vehiculo = null;
         String tipoLlanta = null;
@@ -36,15 +35,10 @@ public class SimuladorAutomovil {
         try {
             LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano();
             ArrayList<String> lineas = lector.leer("C:\\Heily\\SimuladorAutomovil\\config.csv");
-           for(String linea : lineas) {
-            String[] partes = linea.split(";");
-            if (partes[0].equalsIgnoreCase("llantas")) {
-            tipoLlanta = partes[1].trim();
-                 }
-         }
 
             if (!lineas.isEmpty()) {
-                tipoLlanta = lineas.get(0).trim();
+                String[] partes = lineas.get(0).split(";");
+                tipoLlanta = partes[1].trim();  // Asumiendo: "llantas;Bonitas"
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo de configuración está vacío.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -62,10 +56,10 @@ public class SimuladorAutomovil {
                     llanta = new LlantaBuena(110);
                     break;
                 case "Bonitas":
-                    llanta = new LlantaBonita(70); 
+                    llanta = new LlantaBonita(70);
                     break;
                 case "Baratas":
-                    llanta = new LlantaBarata(50); 
+                    llanta = new LlantaBarata(50);
                     break;
                 default:
                     throw new ErrorEnArchivoConfiguracionException();
@@ -80,6 +74,10 @@ public class SimuladorAutomovil {
             return;
         }
 
+        // ✅ Mostrar la ventana DESPUÉS de tener el vehículo listo
+        VentanaPrincipal ventana = new VentanaPrincipal(vehiculo);
+        ventana.setVisible(true);
+
         try {
             vehiculo.encender();
             eventos.add("Encendido correctamente.");
@@ -92,7 +90,6 @@ public class SimuladorAutomovil {
 
             vehiculo.apagar();
             eventos.add("Apagado correctamente.");
-
         } catch (Exception e) {
             eventos.add("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -105,9 +102,5 @@ public class SimuladorAutomovil {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error guardando eventos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-     
-        VentanaPrincipal ventana = new VentanaPrincipal(vehiculo);
-        ventana.setVisible(true);   
     }
 }
