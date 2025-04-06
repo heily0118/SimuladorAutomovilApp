@@ -4,6 +4,8 @@
  */
 package autonoma.simuladorautomovil.views;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author USUARIO
@@ -16,6 +18,15 @@ public class ChoqueCarro extends javax.swing.JDialog {
     public ChoqueCarro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         setSize(2000, 900);
+         setResizable(false);
+         this.setLocationRelativeTo(null); 
+         
+          try {
+        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
+    } catch (NullPointerException e) {
+        System.out.println("Imagen no encontrada");
+    }
     }
 
     /**
