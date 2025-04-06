@@ -37,7 +37,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal(Vehiculo vehiculo) {
     initComponents();
-    setSize(2000, 900);
+    setSize(1100, 900);
     setResizable(false);
     this.setLocationRelativeTo(null);
 
