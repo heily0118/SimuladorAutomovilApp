@@ -28,8 +28,11 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @autor María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  * @since 20250405
- * @see 
+ * @see autonoma.simuladorautomovil.models.Vehiculo
+ * @see autonoma.simuladorautomovil.views.ChoqueCarro
+ * @see autonoma.simuladorautomovil.views.EncenderCarro
  * @version 1.0.0
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
