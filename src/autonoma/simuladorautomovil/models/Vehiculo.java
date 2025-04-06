@@ -89,18 +89,21 @@ public class Vehiculo {
      * Verifica si el vehículo está encendido.
      * @return Retorna true si está encendido y false si está apagado.
      */
-    public boolean isEncendido() {
-        return estaEncendido;
-    }
+   
 
     /**
      * Cambia el estado de encendido del vehículo.
      * @param encendidio Es true para encender y false para apagar.
      */
-    public void setEncendidio(boolean encendidio) {
-        this.estaEncendido = encendidio;
+    public boolean isEstaEncendido() {
+      return estaEncendido;
     }
 
+    public void setEstaEncendido(boolean estaEncendido) {
+    this.estaEncendido = estaEncendido;
+    }
+
+    
     /**
      * Obtiene la velocidad actual del vehículo.
      * @return Retorna la velocidad actual en km/h.
@@ -244,12 +247,7 @@ public class Vehiculo {
     /**
      * Muestra en consola el estado actual del vehículo, incluyendo su velocidad, motor y llantas.
      */
-    public void mostrarEstado() {
-        System.out.println("======== ESTADO DEL VEHÍCULO ========");
-        System.out.println("Encendido: " + (estaEncendido ? "Sí" : "No"));
-        System.out.println("Velocidad actual: " + velocidadActual + " km/h");
-        System.out.println("Motor: " + motor.getCilindraje() + " - Máx: " + motor.getVelocidadMaxima() + " km/h");
-        System.out.println("Llantas: " + llantas.getClass().getSimpleName() + " - Límite: " + llantas.getVelocidadMaxima() + " km/h");
-        System.out.println("======================================");
-    }
+    public String mostrarEstado() {
+    return (estaEncendido ? "encendido" : "apagado");
+}
 }
