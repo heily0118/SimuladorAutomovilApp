@@ -9,6 +9,7 @@ package autonoma.simuladorautomovil.models;
  * @author María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  * @since 20250405
  * @version 1.0.0
+ * @see Llanta
  * 
  */
 public class LlantaBonita extends Llanta {

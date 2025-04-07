@@ -695,7 +695,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void VerificarEstadoLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarEstadoLlantasActionPerformed
         try {
-            String estado = vehiculo.verificarDesgasteLlanta(); // 👈 aquí es donde se llama
+            String estado = vehiculo.verificarDesgasteLlanta(); 
             JOptionPane.showMessageDialog(this, estado, "Estado de Llantas", JOptionPane.INFORMATION_MESSAGE);
             eventos.add("Verificación de llantas: " + estado);
         } catch (KilometrajeInsuficienteException e) {

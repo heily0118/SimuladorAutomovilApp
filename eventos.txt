@@ -7,4 +7,19 @@ Vehículo apagado.
 Vehículo encendido correctamente.
 Aceleró a 10 km/h
 Aceleró a 20 km/h
+Verificación de llantas: Llanta bonita en buen estado (2% desgaste)
 Aceleró a 30 km/h
+Verificación de llantas: Llanta bonita en buen estado (4% desgaste)
+Aceleró a 40 km/h
+Verificación de llantas: Llanta bonita en buen estado (6% desgaste)
+Aceleró a 50 km/h
+Verificación de llantas: Llanta bonita en buen estado (8% desgaste)
+Aceleró a 60 km/h
+Verificación de llantas: Llanta bonita en buen estado (13% desgaste)
+Aceleró a 70 km/h
+Se alcanzó la velocidad permitida. ¡Peligro de accidente!
+Verificación de llantas: Llanta bonita en buen estado (18% desgaste)
+Se alcanzó la velocidad permitida. ¡Peligro de accidente!
+Verificación de llantas: Llanta bonita en buen estado (23% desgaste)
+Se alcanzó la velocidad permitida. ¡Peligro de accidente!
+Verificación de llantas: Llanta bonita en buen estado (28% desgaste)
