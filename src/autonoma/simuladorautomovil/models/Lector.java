@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  * @since 20250405
  * @version 1.0.0
+ * @see autonoma.simuladorautomovil.models.LectorArchivoTextoPlano
  * 
  */
 public interface Lector {

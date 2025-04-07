@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * @author María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  * @since 20250405
  * @version 1.0.0
+ * @see autonoma.simuladorautomovil.models.Lector 
  * 
  */
 public class LectorArchivoTextoPlano implements Lector {
@@ -80,15 +81,13 @@ public class LectorArchivoTextoPlano implements Lector {
      * @param texto Es la lista de cadenas de texto que será limpiada de líneas vacías.
      */
     public void limpiarTexto(ArrayList<String> texto){
-        for (int i = 0; i < texto.size(); i++) {
-            
-            if(texto.get(i).length()==0)
-            {
-                texto.remove(i);
-            }
-            
-        }
-        
+        for (int i = 0; i < texto.size(); ) {
+           if (texto.get(i).trim().isEmpty()) {
+                texto.remove(i); 
+            } else {
+             i++;
+             }
+         }
     }
     
     

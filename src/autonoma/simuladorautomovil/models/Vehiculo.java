@@ -17,7 +17,16 @@ import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @autor María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  * @since 20250405
- * @see 
+ * @see Llanta
+ * @see Motor
+ * @see VehiculoApagadoException
+ * @see VehiculoEncendidoException
+ * @see AccidentePorAceleracionException
+ * @see LimiteDeVelocidadExcedidoException
+ * @see PatinajeException
+ * @see KilometrajeInsuficienteException
+ * @see TerrenoIrregularException
+ * @see VehiculoDetenidoException
  * @version 1.0.0
  */
 public class Vehiculo {
@@ -94,7 +103,7 @@ public class Vehiculo {
 
     /**
      * Cambia el estado de encendido del vehículo.
-     * @param encendidio Es true para encender y false para apagar.
+     * @return  estaEncendido
      */
     public boolean estaEncendido() {
       return estaEncendido;
@@ -267,6 +276,7 @@ public class Vehiculo {
 
     /**
      * Muestra en consola el estado actual del vehículo.
+     * @return el esta del auto encendido o apagado
      */
     public String mostrarEstado() {
         return (estaEncendido ? "Encendido" : "Apagado");
