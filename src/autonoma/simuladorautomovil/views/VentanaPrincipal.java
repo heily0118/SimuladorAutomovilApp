@@ -305,7 +305,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Verificar Estado De Llantas.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/VerificarEstadoDeLlantas.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -347,7 +347,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Frenar Bruscamente.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/FrenarBruscamente.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -609,29 +609,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
         try {
        
-            String input = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea disminuir de velocidad:");
-        
-       
-            if (input == null) {
-                return; 
-            }
-
-       
-            int cantidadFrenar = Integer.parseInt(input);
-
-    
-            vehiculo.frenar(cantidadFrenar);
-
-    
-            eventos.add("Freno a " + vehiculo.getVelocidadActual() + " km/h");
-            Velocidad.setText( vehiculo.getVelocidadActual() + " km/h");
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            eventos.add("Error al frenar: " + e.getMessage());
+        if (!vehiculo.estaEncendido()) {
+            throw new VehiculoApagadoException();
         }
+
+        if (vehiculo.getVelocidadActual() == 0) {
+            throw new VehiculoDetenidoException();
+        }
+
+      
+        String input = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea disminuir de velocidad:");
+        if (input == null || input.trim().isEmpty()) {
+            return;
+        }
+
+        int cantidadFrenar = Integer.parseInt(input.trim());
+
+        
+        String resultado = vehiculo.frenar(cantidadFrenar);
+
+        eventos.add("Frenó: " + resultado);
+        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+        JOptionPane.showMessageDialog(this, resultado);
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
+    } catch (VehiculoDetenidoException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo ya está detenido.", "Atención", JOptionPane.WARNING_MESSAGE);
+        eventos.add("Intento de frenar cuando ya estaba detenido.");
+    } catch (VehiculoApagadoException | PatinajeException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        eventos.add("Error al frenar: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        eventos.add("Error inesperado: " + e.getMessage());
+    }
     }//GEN-LAST:event_frenarActionPerformed
 
     private void FrenarBruscamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrenarBruscamenteActionPerformed

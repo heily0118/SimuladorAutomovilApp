@@ -96,7 +96,7 @@ public class Vehiculo {
      * Cambia el estado de encendido del vehículo.
      * @param encendidio Es true para encender y false para apagar.
      */
-    public boolean isEstaEncendido() {
+    public boolean estaEncendido() {
       return estaEncendido;
     }
 
@@ -170,23 +170,29 @@ public class Vehiculo {
         return "Vehiculo acelerado a " + velocidadActual + " km/h.";
     }
 
-    /**
+        /**
      * Frena el vehículo reduciendo su velocidad en una cantidad específica.
      * @param cantidad Es la disminución de velocidad en km/h.
-     * @return Retorna el mensaje con la nueva velocidad o si ya estaba detenido.
-     * @throws VehiculoApagadoException Se lanza esta excepción si el vehículo está apagado.
+     * @return Retorna el mensaje con la nueva velocidad.
+     * @throws VehiculoApagadoException Si el vehículo está apagado.
+     * @throws VehiculoDetenidoException Si el vehículo ya está completamente detenido.
+     * @throws PatinajeException Si se frena bruscamente desde una velocidad alta.
      */
+    
     public String frenar(int cantidad) {
-        if (!estaEncendido) {
-            throw new VehiculoApagadoException();
-        }
-        if (velocidadActual == 0) {
-            return "El vehiculo ya está detenido.";
-        }
-        velocidadActual = Math.max(0, velocidadActual - cantidad);
-        return "Vehiculo frenado a " + velocidadActual + " km/h.";
+    if (velocidadActual == 0) {
+        throw new VehiculoDetenidoException(); 
+    }
+    if (!estaEncendido) {
+        throw new VehiculoApagadoException();
+    }
+    if (cantidad > velocidadActual) {
+        throw new PatinajeException(); 
     }
 
+    velocidadActual = Math.max(0, velocidadActual - cantidad);
+    return "Vehículo frenado a " + velocidadActual + " km/h.";
+}
     /**
      * Frena bruscamente el vehículo. Puede causar patinaje si las condiciones no son seguras.
      * @param cantidad Es la intensidad del frenado en km/h.
