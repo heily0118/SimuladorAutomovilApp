@@ -7,4 +7,14 @@ Vehículo apagado.
 Vehículo encendido correctamente.
 Aceleró a 10 km/h
 Aceleró a 20 km/h
-Aceleró a 30 km/h
+Frenó: Vehículo frenado a 17 km/h.
+Frenado brusco: El vehículo se ha detenido completamente y ha recuperado el control.
+Advertencia de desgaste: No has recorrido suficientes kilometros aun
+Vehículo apagado correctamente.
+Vehículo encendido correctamente.
+Vehículo apagado correctamente.
+Error al acelerar: El vehiculo ya esta apagado
+¡Piiip piiip!
+Error al frenar: El vehiculo ya esta apagado
+Intento de frenado brusco con el vehículo apagado.
+Error al verificar llantas: El vehiculo ya esta apagado
