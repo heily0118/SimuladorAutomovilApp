@@ -531,7 +531,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/autonoma/simuladorautomovil/images/Verificar Estado De Llantas.png"/>
+                      <Image iconType="3" name="/autonoma/simuladorautomovil/images/VerificarEstadoDeLlantas.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -605,7 +605,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/autonoma/simuladorautomovil/images/Frenar Bruscamente.png"/>
+                      <Image iconType="3" name="/autonoma/simuladorautomovil/images/FrenarBruscamente.png"/>
                     </Property>
                   </Properties>
                 </Component>
