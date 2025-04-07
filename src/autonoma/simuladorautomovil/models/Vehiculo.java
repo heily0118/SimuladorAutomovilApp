@@ -10,6 +10,7 @@ import autonoma.simuladorautomovil.exceptions.AccidentePorAceleracionException;
 import autonoma.simuladorautomovil.exceptions.KilometrajeInsuficienteException;
 import autonoma.simuladorautomovil.exceptions.LimiteDeVelocidadExcedidoException;
 import autonoma.simuladorautomovil.exceptions.PatinajeException;
+import autonoma.simuladorautomovil.exceptions.TerrenoIrregularException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
 /**
  *
@@ -233,21 +234,32 @@ public class Vehiculo {
      * @throws KilometrajeInsuficienteException Se lanza esta excepción si la velocidad es demasiado baja para evaluar el desgaste.
      */
     public String verificarDesgasteLlanta() {
-        if (velocidadActual < 10) {
+        boolean terrenoIrregular = false;
+        if (!estaEncendido) {
             throw new KilometrajeInsuficienteException();
         }
 
-        if (velocidadActual > llantas.getVelocidadMaxima()) {
-            return "Desgaste elevado: se ha superado el límite permitido de las llantas.";
+        if (velocidadActual < 5) {
+            throw new KilometrajeInsuficienteException();
         }
 
-        return "Desgaste normal: las llantas están en buen estado.";
+        if (terrenoIrregular) {
+            throw new TerrenoIrregularException();
+        }
+
+        llantas.aumentarDesgastePorUso(velocidadActual);
+
+        if (llantas.getDesgaste() >= 100) {
+            throw new PatinajeException();
+        }
+
+        return llantas.verificarDesgaste(); 
     }
 
     /**
-     * Muestra en consola el estado actual del vehículo, incluyendo su velocidad, motor y llantas.
+     * Muestra en consola el estado actual del vehículo.
      */
     public String mostrarEstado() {
-    return (estaEncendido ? "encendido" : "apagado");
-}
+        return (estaEncendido ? "Encendido" : "Apagado");
+    }
 }
