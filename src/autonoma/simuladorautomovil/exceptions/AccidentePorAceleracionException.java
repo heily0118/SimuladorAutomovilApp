@@ -6,7 +6,10 @@ package autonoma.simuladorautomovil.exceptions;
 
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @since 20250405
+ * @see autonoma.simuladorautomovil.models.Vehiculo
+ * @version 1.0.0
  */
 public class AccidentePorAceleracionException extends RuntimeException {
 

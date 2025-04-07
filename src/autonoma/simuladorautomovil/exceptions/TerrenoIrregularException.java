@@ -7,6 +7,7 @@ package autonoma.simuladorautomovil.exceptions;
 /**
  *
  * @author María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
+ * @see autonoma.simuladorautomovil.models.Vehiculo
  * @since 20250405
  * @version 1.0.0
  * 

@@ -8,9 +8,10 @@ package autonoma.simuladorautomovil.exceptions;
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @since 20250405
- * @see 
+ * @see autonoma.simuladorautomovil.models.Vehiculo
  * @version 1.0.0
  */
+
 public class VehiculoEncendidoException extends RuntimeException{
 
     public VehiculoEncendidoException() {
