@@ -68,7 +68,7 @@ public class LectorArchivoTextoPlano implements Lector {
     /**
      * Agrega lineas al Arraylist en el cual le guarda el archivo
      *
-     * @param linea
+     * @param linea Es la línea de texto que se desea agregar al archivo.
      */
     public void agregarLinea(String linea) {
         archivo.add(linea);
@@ -77,7 +77,7 @@ public class LectorArchivoTextoPlano implements Lector {
  
     /**
      * Limpia el archivo de posiciones en blanco
-     * @param texto 
+     * @param texto Es la lista de cadenas de texto que será limpiada de líneas vacías.
      */
     public void limpiarTexto(ArrayList<String> texto){
         for (int i = 0; i < texto.size(); i++) {

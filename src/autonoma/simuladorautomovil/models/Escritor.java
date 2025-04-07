@@ -19,7 +19,7 @@ public interface Escritor {
     /**
      * Escribe el archivo de memoria interna por lineas
      * 
-     * @param archivo
+     * @param archivo Es la lista de cadenas que representan el contenido del archivo, línea por línea.
      * @throws java.io.IOException si el archivo no existe
      */
     

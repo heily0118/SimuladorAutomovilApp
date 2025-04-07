@@ -18,7 +18,7 @@ public interface Lector {
     /**
      * Lee el archivo
      * @param localizacionArchivo
-     * @return
+     * @return Retorna un ArrayList de String que contiene cada línea del archivo como un elemento de la lista.
      * @throws IOException Si el archivo no existe
      */
     public abstract ArrayList<String> leer(String localizacionArchivo)

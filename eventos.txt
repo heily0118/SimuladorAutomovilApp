@@ -5,27 +5,6 @@ Aceleró a 50 km/h.
 Frenó a 30 km/h.
 Vehículo apagado.
 Vehículo encendido correctamente.
-Vehículo apagado correctamente.
-Vehículo encendido correctamente.
 Aceleró a 10 km/h
 Aceleró a 20 km/h
 Aceleró a 30 km/h
-Aceleró a 40 km/h
-Aceleró a 50 km/h
-Aceleró a 60 km/h
-Aceleró a 70 km/h
-Se alcanzó la velocidad permitida. ¡Peligro de accidente!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
