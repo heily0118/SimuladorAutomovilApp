@@ -10,6 +10,7 @@ import autonoma.simuladorautomovil.exceptions.TerrenoIrregularException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
+import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.LlantaBuena;
 import autonoma.simuladorautomovil.models.Motor;
 import javax.swing.ImageIcon;
@@ -46,14 +47,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal(Vehiculo vehiculo) {
+    public VentanaPrincipal(Vehiculo vehiculo, ArrayList<String> eventos) {
         initComponents();
         setSize(1100, 900);
         setResizable(false);
         this.setLocationRelativeTo(null);
 
         this.vehiculo = vehiculo;
-        this.eventos = new ArrayList<>();
+        this.eventos = eventos;
 
    
 
@@ -62,6 +63,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } catch (NullPointerException e) {
             System.out.println("Imagen no encontrada");
         }
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent e) {
+            try {
+                EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("eventos.txt");
+                escritor.escribir(eventos);
+                System.out.println("Eventos guardados al cerrar ventana.");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error guardando eventos al cerrar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    });
     }
     /**
      * This method is called from within the constructor to initialize the form.

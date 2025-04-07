@@ -95,7 +95,7 @@ public class SimuladorAutomovil {
         }
 
      
-        VentanaPrincipal ventana = new VentanaPrincipal(vehiculo);
+        VentanaPrincipal ventana = new VentanaPrincipal(vehiculo, eventos);
         ventana.setVisible(true);
 
        
