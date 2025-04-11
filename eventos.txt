@@ -1,1 +1,2 @@
 Vehículo encendido correctamente.
+Vehículo apagado correctamente.

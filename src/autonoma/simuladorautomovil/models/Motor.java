@@ -132,5 +132,13 @@ public class Motor {
         velocidadActual = 0;
         return "Vehiculo apagado.";
     }
+    
+    /**
+     * Muestra en consola el estado actual del vehículo.
+     * @return el esta del auto encendido o apagado
+     */
+    public String mostrarEstado() {
+        return (estaEncendido ? "Encendido" : "Apagado");
+    }
 
 }

@@ -51,16 +51,9 @@ public class Vehiculo {
      */
     private int velocidadActual;
 
-    /**
-     * Constructor de la clase Vehiculo.
-     * @param llantas Son las llantas del vehículo.
-     * @param motor Es el motor del vehículo.
-     */
     public Vehiculo() {
-       
+        
     }
-
-   
 
     /**
      * Obtiene las llantas del vehículo.
@@ -211,14 +204,6 @@ public class Vehiculo {
         return "Frenado exitoso. Velocidad actual: " + velocidadActual + " km/h.";
     }
     
-    
-    /**
-     * Muestra en consola el estado actual del vehículo.
-     * @return el esta del auto encendido o apagado
-     */
-    public String mostrarEstado() {
-        return (estaEncendido ? "Encendido" : "Apagado");
-    }
     
     /**
      * Verifica si el vehículo ha sido configurado correctamente.
