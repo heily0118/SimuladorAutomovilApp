@@ -4,5 +4,10 @@ Vehículo encendido.
 Aceleró a 50 km/h.
 Frenó a 30 km/h.
 Vehículo apagado.
+<<<<<<< HEAD
 Vehículo encendido correctamente.
 Vehículo apagado correctamente.
+=======
+¡Piiip piiip!
+Intento de frenado brusco con el vehículo apagado.
+>>>>>>> 098a2f631b1912a162d03418f9367e84fa078528
