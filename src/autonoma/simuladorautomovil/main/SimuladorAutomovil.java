@@ -8,9 +8,6 @@ import autonoma.simuladorautomovil.exceptions.ErrorEnArchivoConfiguracionExcepti
 import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.LectorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.Llanta;
-import autonoma.simuladorautomovil.models.LlantaBarata;
-import autonoma.simuladorautomovil.models.LlantaBonita;
-import autonoma.simuladorautomovil.models.LlantaBuena;
 import autonoma.simuladorautomovil.models.Motor;
 import autonoma.simuladorautomovil.models.Vehiculo;
 import autonoma.simuladorautomovil.views.VentanaPrincipal;
@@ -75,13 +72,13 @@ public class SimuladorAutomovil {
             Llanta llanta;
             switch (tipoLlanta) {
                 case "Buenas":
-                    llanta = new LlantaBuena();
+                    llanta = new Llanta(110, "Buenas");
                     break;
                 case "Bonitas":
-                    llanta = new LlantaBonita();
+                    llanta = new Llanta(70, "Bonitas");
                     break;
                 case "Baratas":
-                    llanta = new LlantaBarata();
+                    llanta = new Llanta(50, "Baratas");
                     break;
                 default:
                     throw new ErrorEnArchivoConfiguracionException();

@@ -244,37 +244,6 @@ public class Vehiculo {
     }
 
     /**
-     * Verifica el estado actual de las llantas del vehículo teniendo en cuenta la velocidad y condiciones del terreno.
-     * @return Retorna un mensaje que describe el estado actual del desgaste de las llantas.
-     * @throws VehiculoApagadoException Se lanza esta excepción cuando el vehículo no está encendido.
-     * @throws KilometrajeInsuficienteException Se lanza esta excepcion cuando la velocidad actual es cero.
-     * @throws TerrenoIrregularException Se lanza esta excepcion cuando se detecta que el vehículo circula por terreno irregular.
-     * @throws PatinajeException Se lanza esta excepción cuando el desgaste de las llantas es igual o mayor al 100%.
-     */
-    public String verificarDesgasteLlanta() {
-        boolean terrenoIrregular = false;
-        if (!estaEncendido) {
-            throw new VehiculoApagadoException();
-        }
-
-        if (velocidadActual == 0) {
-            throw new KilometrajeInsuficienteException();
-        }
-
-        if (terrenoIrregular) {
-            throw new TerrenoIrregularException();
-        }
-
-        llantas.aumentarDesgastePorUso(velocidadActual);
-
-        if (llantas.getDesgaste() >= 100) {
-            throw new PatinajeException();
-        }
-
-        return llantas.verificarDesgaste(); 
-    }
-
-    /**
      * Muestra en consola el estado actual del vehículo.
      * @return el esta del auto encendido o apagado
      */
