@@ -99,8 +99,9 @@ public class Taller {
         default:
             System.out.println("Tipo de llanta no reconocido: " + tipo);
             return new Llanta(0, "Desconocida");
+
+       }
     }
-}
 
     private Motor crearMotorPorTipo(String tipo) {
         switch (tipo) {

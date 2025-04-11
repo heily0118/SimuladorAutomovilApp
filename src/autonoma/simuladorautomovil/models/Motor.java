@@ -36,6 +36,11 @@ public class Motor {
      * Velocidad actual del vehículo en km/h.
      */
     private int velocidadActual;
+    
+    /**
+     * Tipo de motor del vehículo.
+     */
+    private String tipoMotor;
 
     /**
      * Constructor de la clase Motor
@@ -78,5 +83,14 @@ public class Motor {
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
     }
+
+    public String getTipoMotor() {
+        return tipoMotor;
+    }
+
+    public void setTipoMotor(String tipoMotor) {
+        this.tipoMotor = tipoMotor;
+    }
+    
     
 }
