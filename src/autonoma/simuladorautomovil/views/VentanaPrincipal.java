@@ -10,13 +10,17 @@ import autonoma.simuladorautomovil.exceptions.TerrenoIrregularException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
+import autonoma.simuladorautomovil.models.Escritor;
 import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
+import autonoma.simuladorautomovil.models.LectorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.Motor;
 import autonoma.simuladorautomovil.models.Simulador;
+import autonoma.simuladorautomovil.models.Taller;
 import javax.swing.ImageIcon;
 import autonoma.simuladorautomovil.models.Vehiculo;
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -694,7 +698,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
 
     private void ConfigurarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfigurarVehiculoActionPerformed
-        
+           String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
+            String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
+             Vehiculo vehiculo = new Vehiculo();
+           
     }//GEN-LAST:event_ConfigurarVehiculoActionPerformed
 
     private void PitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PitoActionPerformed
