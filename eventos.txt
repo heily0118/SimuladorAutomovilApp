@@ -2,3 +2,48 @@ Vehículo encendido correctamente.
 Aceleró a 10 km/h
 Aceleró a 20 km/h
 Aceleró a 30 km/h
+Aceleró a 40 km/h
+Aceleró a 50 km/h
+Aceleró a 60 km/h
+Aceleró a 70 km/h
+Aceleró a 80 km/h
+Aceleró a 90 km/h
+Aceleró a 100 km/h
+Aceleró a 110 km/h
+Se alcanzó la velocidad permitida. ¡Peligro de accidente!
+Se alcanzó la velocidad permitida. ¡Peligro de accidente!
+Frenó: Vehículo frenado a 50 km/h.
+Aceleró a 60 km/h
+Aceleró a 70 km/h
+Aceleró a 80 km/h
+Aceleró a 90 km/h
+Aceleró a 100 km/h
+Aceleró a 110 km/h
+Se alcanzó la velocidad permitida. ¡Peligro de accidente!
+Frenado brusco: El vehículo se ha detenido completamente y ha recuperado el control.
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+Vehículo apagado correctamente.
