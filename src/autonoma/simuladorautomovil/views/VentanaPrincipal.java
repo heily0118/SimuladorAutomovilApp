@@ -531,38 +531,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
-  try {
-        if (!vehiculo.estaEncendido()) {
-            throw new VehiculoApagadoException();
+        if (vehiculo == null) {
+          JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        
+        try {
+            
+            if (!vehiculo.estaEncendido()) {
+                throw new VehiculoApagadoException();
+            }
 
-        int velocidadAcelerar = 10; 
-        int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
-        int velocidadActual = vehiculo.getVelocidadActual();
+           int velocidadAcelerar = 10; 
+           int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
+           int velocidadActual = vehiculo.getVelocidadActual();
 
-        if (velocidadActual < velocidadMaxima) {
-            vehiculo.acelerar(velocidadAcelerar);
-            reproducirSonidoAceleracion();
-            eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
-            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-            System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
+            if (velocidadActual < velocidadMaxima) {
+                vehiculo.acelerar(velocidadAcelerar);
+                reproducirSonidoAceleracion();
+                eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
+                Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+                System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
+            }
+
+            if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
+                eventos.add("Se alcanzó la velocidad permitida. ¡Peligro de accidente!");
+                reproducirSonidoChoque(); 
+
+               ChoqueCarro choque = new ChoqueCarro(this, true);
+               choque.setVisible(true);
+            }
+
+        } catch (VehiculoApagadoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+            eventos.add("Intento de acelerar con el vehículo apagado.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            eventos.add("Error al acelerar: " + e.getMessage());
         }
-
-        if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
-            eventos.add("Se alcanzó la velocidad permitida. ¡Peligro de accidente!");
-            reproducirSonidoChoque(); 
-
-            ChoqueCarro choque = new ChoqueCarro(this, true);
-            choque.setVisible(true);
-        }
-
-    } catch (VehiculoApagadoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-        eventos.add("Intento de acelerar con el vehículo apagado.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error al acelerar: " + e.getMessage());
-    }
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
