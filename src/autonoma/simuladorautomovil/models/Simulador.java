@@ -4,6 +4,7 @@
  */
 package autonoma.simuladorautomovil.models;
 
+import autonoma.simuladorautomovil.exceptions.ErrorEnArchivoConfiguracionException;
 import java.io.IOException;
 
 /**
@@ -42,7 +43,7 @@ public class Simulador {
      * @param rutaArchivo Ruta del archivo de configuración.
      * @throws IOException Si ocurre un error al leer el archivo.
      */
-    public void iniciar(String rutaArchivo) throws IOException {
+    public void iniciar(String rutaArchivo) throws IOException, ErrorEnArchivoConfiguracionException  {
         taller.configurarVehiculo(rutaArchivo); 
     }
 
