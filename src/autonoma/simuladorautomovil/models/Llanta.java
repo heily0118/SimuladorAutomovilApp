@@ -17,26 +17,29 @@ package autonoma.simuladorautomovil.models;
  
 public class Llanta {
     /**
-     * Velocidad máxima a la que se desgasta la llanta.
+     * Velocidad máxima a la que la llanta puede operar sin patinar.
      */
     private int velocidadMaxima;
     
     /**
-     * Es el tipo de llantas que tiene el vehículo.
+     * Tipo de llanta (ej. Buenas, Bonitas, Baratas).
      */
     private String tipoLlanta;
 
     /**
      * Constructor de la clase Llanta.
+     * 
+     * @param velocidadMaxima La velocidad máxima permitida para esta llanta.
+     * @param tipoLlanta El tipo de la llanta.
      */
-    public Llanta(int velocidadMaxima, String tipoLlanta) {    
+    public Llanta(int velocidadMaxima, String tipoLlanta) {
         this.velocidadMaxima = velocidadMaxima;
         this.tipoLlanta = tipoLlanta;
     }
 
     /**
      * Obtiene la velocidad máxima recomendada para la llanta.
-     * @return Retorna la velocidad máxima en km/h.
+     * @return La velocidad máxima en km/h.
      */
     public int getVelocidadMaxima() {
         return velocidadMaxima;
@@ -44,46 +47,58 @@ public class Llanta {
 
     /**
      * Establece una nueva velocidad máxima recomendada para la llanta.
-     * @param velocidadMaxima Es la velocidadMaxima Nueva velocidad máxima en km/h.
+     * @param velocidadMaxima Nueva velocidad máxima en km/h.
      */
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
     }
 
     /**
-     * Obtiene el tipo de llanta.
-     * @return Retorna el tipo de llanta del vehículo.
+     * Obtiene el tipo de llanta del vehículo.
+     * @return El tipo de llanta.
      */
     public String getTipoLlanta() {
         return tipoLlanta;
     }
 
     /**
-     * Establece una nueva velocidad máxima recomendada para la llanta
-     * @param tipoLlanta Es el tipo de llanta del vehículo.
+     * Establece un nuevo tipo de llanta.
+     * @param tipoLlanta El tipo de llanta del vehículo.
      */
     public void setTipoLlanta(String tipoLlanta) {
         this.tipoLlanta = tipoLlanta;
     }
     
-     /**
-     * Asigna la velocidad máxima permitida según el tipo de llanta.
+    /**
+     * Verifica si la velocidad del vehículo excede el límite de la llanta.
+     * Si la velocidad es superior a la máxima permitida, el vehículo patina.
+     * 
+     * @param velocidadActual La velocidad actual del vehículo.
      */
-    private void verificarVelocidadMaximaPorTipo() {
+    public void verificarVelocidadMaxima(int velocidadActual) {
+        if (velocidadActual > velocidadMaxima) {
+            System.out.println("Las llantas de tipo " + tipoLlanta + " del vehículo están patinando.");
+        }
+    }
+    
+    /**
+     * Verifica si el tipo de llanta es válido y establece la velocidad máxima correcta.
+     */
+    public void verificarTipoLlanta() {
         switch (tipoLlanta.toLowerCase()) {
-            case "Buenas":
-                if (velocidadMaxima > 110){
-                    System.out.println("Las llantas buenas del vehiculo están patinando");
+            case "buenas":
+                if (velocidadMaxima > 110) {
+                    System.out.println("Las llantas buenas del vehículo están patinando.");
                 }
                 break;
-            case "Bonitas":
-                if (velocidadMaxima > 70){
-                    System.out.println("Las llantas bonitas del vehiculo están patinando");
+            case "bonitas":
+                if (velocidadMaxima > 70) {
+                    System.out.println("Las llantas bonitas del vehículo están patinando.");
                 }
                 break;
-            case "Baratas":
-                if (velocidadMaxima > 50){
-                    System.out.println("Las llantas baratas del vehiculo están patinando");
+            case "baratas":
+                if (velocidadMaxima > 50) {
+                    System.out.println("Las llantas baratas del vehículo están patinando.");
                 }
                 break;
             default:

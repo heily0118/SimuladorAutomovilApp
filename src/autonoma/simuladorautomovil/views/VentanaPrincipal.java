@@ -4,6 +4,8 @@
  */
 package autonoma.simuladorautomovil.views;
 
+import autonoma.simuladorautomovil.exceptions.AccidentePorAceleracionException;
+import autonoma.simuladorautomovil.exceptions.LimiteDeVelocidadExcedidoException;
 import autonoma.simuladorautomovil.exceptions.PatinajeException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
@@ -19,7 +21,6 @@ import autonoma.simuladorautomovil.models.Taller;
 import javax.swing.ImageIcon;
 import autonoma.simuladorautomovil.models.Vehiculo;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -507,44 +508,46 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
-        if (vehiculo == null) {
-          JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
         try {
-            
-            if (!vehiculo.estaEncendido()) {
-                throw new VehiculoApagadoException();
-            }
-
-           int velocidadAcelerar = 10; 
-           int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
-           int velocidadActual = vehiculo.getVelocidadActual();
-
-            if (velocidadActual < velocidadMaxima) {
-                vehiculo.acelerar(velocidadAcelerar);
-                reproducirSonido("/autonoma/simuladorautomovil/sounds/aceleracion.wav");
-               
-                Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-                System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
-            }
-
-            if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
-               
-                reproducirSonido("/autonoma/simuladorautomovil/sounds/videoChoque.wav"); 
-
-               ChoqueCarro choque = new ChoqueCarro(this, true);
-               choque.setVisible(true);
-            }
-
-        } catch (VehiculoApagadoException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-           
+        if (!vehiculo.estaEncendido()) {
+            throw new VehiculoApagadoException();
         }
+
+        int velocidadAcelerar = 10; 
+        int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
+        int velocidadActual = vehiculo.getVelocidadActual();
+
+        if (velocidadActual < velocidadMaxima) {
+            vehiculo.acelerar(velocidadAcelerar);
+            reproducirSonido("/autonoma/simuladorautomovil/sounds/aceleracion.wav");
+            
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+            System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
+        }
+
+        if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
+            throw new LimiteDeVelocidadExcedidoException();
+        }
+
+        if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
+            reproducirSonido("/autonoma/simuladorautomovil/sounds/videoChoque.wav");
+
+            ChoqueCarro choque = new ChoqueCarro(this, true);
+            choque.setVisible(true);
+        }
+
+    } catch (VehiculoApagadoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+    } catch (LimiteDeVelocidadExcedidoException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo ha superado el límite de velocidad permitido por las llantas.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        
+    } catch (VehiculoNoConfiguradoException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo no está configurado. Asegúrate de configurar el motor y las llantas.", "Error", JOptionPane.ERROR_MESSAGE);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
@@ -579,25 +582,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_estadoAutoActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
-        if (vehiculo == null) {
-            JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        try {
-            motor.apagar();
+      try {
+        String mensaje = vehiculo.apagar(); 
 
-           
-            estadoAuto.setText(motor.mostrarEstado());
-            Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
+        estadoAuto.setText(vehiculo.getMotor().mostrarEstado());
+        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
 
-      
-            JOptionPane.showMessageDialog(this, "El vehículo se ha apagado exitosamente.", "Apagado", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Apagado", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
-            
-        }
+    } catch (VehiculoNoConfiguradoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Vehículo no configurado", JOptionPane.ERROR_MESSAGE);
+
+    } catch (VehiculoApagadoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Ya estaba apagado", JOptionPane.WARNING_MESSAGE);
+
+    } catch (AccidentePorAceleracionException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "¡Peligro!", JOptionPane.WARNING_MESSAGE);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_apagarActionPerformed
 
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
