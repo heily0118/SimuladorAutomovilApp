@@ -7,6 +7,7 @@ package autonoma.simuladorautomovil.models;
 import autonoma.simuladorautomovil.exceptions.AccidentePorAceleracionException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
+import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
 
 /**
  *
@@ -108,7 +109,7 @@ public class Motor {
      * @return Mensaje de confirmación.
      * @throws VehiculoEncendidoException Si el vehículo ya estaba encendido.
      */
-    public String encender() {
+    public String encender() throws VehiculoNoConfiguradoException{
         if (estaEncendido) {
             throw new VehiculoEncendidoException();
         }
@@ -124,7 +125,7 @@ public class Motor {
      * @throws VehiculoApagadoException Si ya está apagado.
      * @throws AccidentePorAceleracionException Si la velocidad es mayor a 60 km/h.
      */
-    public String apagar() {
+    public String apagar() throws VehiculoNoConfiguradoException {
         if (!estaEncendido) {
             throw new VehiculoApagadoException();
         }

@@ -42,6 +42,7 @@ public class Simulador {
      * 
      * @param rutaArchivo Ruta del archivo de configuración.
      * @throws IOException Si ocurre un error al leer el archivo.
+     * @throws ErrorEnArchivoConfiguracionException Si no se interpreta de manera correcta el archivo de configuración.
      */
     public void iniciar(String rutaArchivo) throws IOException, ErrorEnArchivoConfiguracionException  {
         taller.configurarVehiculo(rutaArchivo); 
