@@ -20,10 +20,36 @@ public class Taller {
     private Escritor escritor;
 
     public Taller(Vehiculo vehiculo, Lector lector, Escritor escritor) {
+    this.vehiculo = vehiculo;
+    this.lector = lector;
+    this.escritor = escritor;
+}
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+
+    public Lector getLector() {
+        return lector;
+    }
+
+    public void setLector(Lector lector) {
         this.lector = lector;
+    }
+
+    public Escritor getEscritor() {
+        return escritor;
+    }
+
+    public void setEscritor(Escritor escritor) {
         this.escritor = escritor;
     }
+    
+    
 
     /**
      * Configura el vehículo leyendo el archivo de configuración
