@@ -97,25 +97,30 @@ public class Taller {
      * @throws IOException Si hay un problema leyendo el archivo
      */
     public void configurarVehiculo(String rutaArchivo) throws IOException {
-        ArrayList<String> lineas = lector.leer(rutaArchivo);
+    ArrayList<String> lineas = lector.leer(rutaArchivo);
 
-        String tipoLlanta = "";
-        String tipoMotor = "";
+    String tipoLlanta = "";
+    String tipoMotor = "";
 
-        for (String linea : lineas) {
-            if (linea.toLowerCase().startsWith("llantas")) {
-                tipoLlanta = linea.split(" ")[1];
-            } else if (linea.toLowerCase().startsWith("motor")) {
-                tipoMotor = linea.split(" ")[1];
-            }
+    for (String linea : lineas) {
+        String[] partes = linea.trim().split(";");
+        if (partes.length < 2) {
+            throw new IOException("Línea mal formada en archivo de configuración: " + linea);
         }
 
-        Llanta llanta = crearLlantaPorTipo(tipoLlanta);
-        Motor motor = crearMotorPorTipo(tipoMotor);
-
-        vehiculo.setLlantas(llanta);
-        vehiculo.setMotor(motor);
+        if (partes[0].equalsIgnoreCase("llantas")) {
+            tipoLlanta = partes[1];
+        } else if (partes[0].equalsIgnoreCase("motor")) {
+            tipoMotor = partes[1];
+        }
     }
+
+    Llanta llanta = crearLlantaPorTipo(tipoLlanta);
+    Motor motor = crearMotorPorTipo(tipoMotor);
+
+    vehiculo.setLlantas(llanta);
+    vehiculo.setMotor(motor);
+}
 
     /**
      * Guarda la configuración actual del vehículo en el archivo
