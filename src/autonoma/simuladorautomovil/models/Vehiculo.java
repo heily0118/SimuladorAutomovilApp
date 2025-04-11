@@ -32,77 +32,48 @@ import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
  */
 public class Vehiculo {
 
-    /**
-     * Llantas del vehículo.
-     */
     private Llanta llantas;
-
-    /**
-     * Motor del vehículo.
-     */
     private Motor motor;
-
-    /**
-     * Velocidad actual del vehículo en km/h.
-     */
     private int velocidadActual;
 
     /**
-     * Crea un nuevo vehículo sin configurar.
+     * Crea un nuevo vehículo sin configuración inicial.
      */
     public Vehiculo() {}
 
-    /**
-     * Obtiene las llantas del vehículo.
-     * @return Retorna las llantas del vehículo.
-     */
     public Llanta getLlantas() {
         return llantas;
     }
 
-    /**
-     * Establece nuevas llantas para el vehículo.
-     * @param llantas Son las llantas a asignar.
-     */
     public void setLlantas(Llanta llantas) {
         this.llantas = llantas;
     }
 
-    /**
-     * Obtiene el motor del vehículo.
-     * @return Retorna el motor del vehículo.
-     */
     public Motor getMotor() {
         return motor;
     }
 
-    /**
-     * Establece un nuevo motor para el vehículo.
-     * @param motor Es el motor a asignar.
-     */
     public void setMotor(Motor motor) {
         this.motor = motor;
     }
 
-    /**
-     * Obtiene la velocidad actual del vehículo.
-     * @return Retorna la velocidad actual en km/h.
-     */
     public int getVelocidadActual() {
         return velocidadActual;
     }
 
-    /**
-     * Establece la velocidad actual del vehículo.
-     * @param velocidadActual Es la velocidad en km/h a asignar.
-     */
     public void setVelocidadActual(int velocidadActual) {
         this.velocidadActual = velocidadActual;
+        if (motor != null) {
+            motor.setVelocidadActual(velocidadActual);
+        }
     }
 
     /**
-     * Enciende el vehículo si ya está configurado.
-     * @return Retorna un mensaje indicando si el motor fue encendido o ya estaba encendido.
+     * Enciende el vehículo si está configurado.
+     * 
+     * @return Mensaje indicando si el encendido fue exitoso.
+     * @throws VehiculoNoConfiguradoException Si el vehículo no tiene motor o llantas.
+     * @throws VehiculoEncendidoException Si el motor ya está encendido.
      */
     public String encender() {
         if (!estaConfigurado()) {
@@ -112,30 +83,35 @@ public class Vehiculo {
     }
 
     /**
-     * Apaga el vehículo si está encendido.
-     * También reinicia la velocidad actual a 0.
-     * @return Retorna un mensaje indicando que el vehículo fue apagado correctamente.
+     * Apaga el vehículo si es seguro hacerlo.
+     * 
+     * @return Mensaje de confirmación.
+     * @throws VehiculoApagadoException Si ya está apagado.
+     * @throws AccidentePorAceleracionException Si se intenta apagar con velocidad > 60 km/h.
      */
     public String apagar() {
         String mensaje = motor.apagar();
         this.velocidadActual = 0;
+        motor.setVelocidadActual(0);
         return mensaje;
     }
 
     /**
-     * Verifica si el vehículo está encendido.
-     * @return Retorna true si el motor está encendido, false en caso contrario.
+     * Verifica si el motor del vehículo está encendido.
+     * 
+     * @return true si el motor está encendido, false si está apagado o no asignado.
      */
     public boolean estaEncendido() {
         return motor != null && motor.estaEncendido();
     }
 
     /**
-     * Acelera el vehículo en una cantidad específica.
-     * @param cantidad Es el aumento de velocidad en km/h.
-     * @return Retorna el mensaje con la nueva velocidad (Aceleración).
-     * @throws VehiculoApagadoException Se lanza esta excepción si el vehículo está apagado.
-     * @throws LimiteDeVelocidadExcedidoException Se lanza esta excepción si se supera el límite de velocidad de las llantas.
+     * Acelera el vehículo si está encendido y no supera el límite de las llantas.
+     * 
+     * @param cantidad Incremento de velocidad en km/h.
+     * @return Mensaje indicando la nueva velocidad.
+     * @throws VehiculoApagadoException Si el motor está apagado.
+     * @throws LimiteDeVelocidadExcedidoException Si se supera la velocidad de las llantas.
      */
     public String acelerar(int cantidad) {
         if (!estaEncendido()) {
@@ -145,16 +121,18 @@ public class Vehiculo {
             throw new LimiteDeVelocidadExcedidoException();
         }
         velocidadActual += cantidad;
-        return "Vehiculo acelerado a " + velocidadActual + " km/h.";
+        motor.setVelocidadActual(velocidadActual);
+        return "Vehículo acelerado a " + velocidadActual + " km/h.";
     }
 
     /**
-     * Frena el vehículo reduciendo su velocidad en una cantidad específica.
-     * @param cantidad Es la disminución de velocidad en km/h.
-     * @return Retorna el mensaje con la nueva velocidad.
-     * @throws VehiculoApagadoException Si el vehículo está apagado.
-     * @throws VehiculoDetenidoException Si el vehículo ya está completamente detenido.
-     * @throws PatinajeException Si se frena bruscamente desde una velocidad alta.
+     * Frena el vehículo si está encendido y no está detenido completamente.
+     * 
+     * @param cantidad Reducción de velocidad en km/h.
+     * @return Mensaje indicando la nueva velocidad.
+     * @throws VehiculoApagadoException Si el motor está apagado.
+     * @throws VehiculoDetenidoException Si el vehículo ya está detenido.
+     * @throws PatinajeException Si el frenado es muy brusco y puede causar patinaje.
      */
     public String frenar(int cantidad) {
         if (velocidadActual == 0) {
@@ -168,16 +146,18 @@ public class Vehiculo {
         }
 
         velocidadActual = Math.max(0, velocidadActual - cantidad);
+        motor.setVelocidadActual(velocidadActual);
         return "Vehículo frenado a " + velocidadActual + " km/h.";
     }
 
     /**
-     * Frena bruscamente el vehículo. Puede causar patinaje si las condiciones no son seguras.
-     * @param cantidad Es la intensidad del frenado en km/h.
-     * @return Retorna el mensaje con el estado del frenado.
-     * @throws VehiculoApagadoException Se lanza esta excepción si el vehículo está apagado.
-     * @throws VehiculoDetenidoException Se lanza esta excepción si el vehículo ya está detenido.
-     * @throws PatinajeException Se lanza esta excepción si el frenado es peligroso por velocidad excesiva o frenado muy brusco.
+     * Realiza un frenado brusco. Puede lanzar excepción por patinaje si es riesgoso.
+     * 
+     * @param cantidad Cantidad de frenado en km/h.
+     * @return Mensaje sobre el resultado del frenado.
+     * @throws VehiculoApagadoException Si el vehículo está apagado.
+     * @throws VehiculoDetenidoException Si el vehículo ya estaba detenido.
+     * @throws PatinajeException Si las condiciones del frenado son peligrosas.
      */
     public String frenarAutoBruscamente(int cantidad) {
         boolean patinando = true;
@@ -202,6 +182,7 @@ public class Vehiculo {
 
         velocidadActual -= cantidad;
         if (velocidadActual < 0) velocidadActual = 0;
+        motor.setVelocidadActual(velocidadActual);
 
         if (velocidadActual == 0 && patinando) {
             return "El vehículo se ha detenido completamente y ha recuperado el control.";
@@ -211,8 +192,9 @@ public class Vehiculo {
     }
 
     /**
-     * Verifica si el vehículo ha sido configurado correctamente.
-     * @return Retorna true si el vehículo tiene llantas y motor asignados, false en caso contrario.
+     * Verifica si el vehículo tiene motor y llantas configuradas.
+     * 
+     * @return true si está listo para usarse, false en caso contrario.
      */
     public boolean estaConfigurado() {
         return llantas != null && motor != null;
