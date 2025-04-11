@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- *@author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  * @since 20250405
  * @see autonoma.simuladorautomovil.models.Vehiculo
  * @version 1.0.0
