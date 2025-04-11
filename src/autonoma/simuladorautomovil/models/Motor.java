@@ -4,6 +4,10 @@
  */
 package autonoma.simuladorautomovil.models;
 
+import autonoma.simuladorautomovil.exceptions.AccidentePorAceleracionException;
+import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
+import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
+
 /**
  *
  *  
@@ -22,6 +26,16 @@ public class Motor {
      * Velocidad máxima en km/h.
      */
     private int velocidadMaxima;
+    
+     /**
+     * Indica si el vehículo está encendido (true) o apagado (false).
+     */
+    private boolean estaEncendido;
+    
+    /**
+     * Velocidad actual del vehículo en km/h.
+     */
+    private int velocidadActual;
 
     /**
      * Constructor de la clase Motor
@@ -64,7 +78,5 @@ public class Motor {
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
     }
-    
-    
     
 }

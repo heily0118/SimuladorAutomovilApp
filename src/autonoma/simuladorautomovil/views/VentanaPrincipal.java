@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 public class VentanaPrincipal extends javax.swing.JFrame {
     
    private Vehiculo vehiculo;
+   private Motor motor;
    private ArrayList<String> eventos = new ArrayList<>();
   
  
