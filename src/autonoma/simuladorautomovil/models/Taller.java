@@ -87,10 +87,6 @@ public class Taller {
             }
         }
 
-        if (tipoLlanta == null || tipoMotor == null) {
-            throw new IOException("Falta información de configuración en el archivo.");
-        }
-
         Llanta llanta = crearLlantaPorTipo(tipoLlanta);
         Motor motor = crearMotorPorTipo(tipoMotor);
 

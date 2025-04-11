@@ -7,6 +7,7 @@ package autonoma.simuladorautomovil.models;
 import autonoma.simuladorautomovil.exceptions.AccidentePorAceleracionException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
+import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
 
 /**
  *

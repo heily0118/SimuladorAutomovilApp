@@ -46,7 +46,7 @@ public class EscritorArchivoTextoPlano implements Escritor {
     @Override
     public void escribir(ArrayList<String> archivo) throws IOException {
         
-         File fichero = new File(this.filePath);
+        File fichero = new File(this.filePath);
         FileWriter writer = new FileWriter(fichero,false);
         PrintWriter pw = new PrintWriter(writer);
         
