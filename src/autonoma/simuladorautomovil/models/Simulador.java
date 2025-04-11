@@ -23,7 +23,7 @@ public class Simulador {
     }
 
     public void iniciar(String rutaArchivo) {
-        taller.configurarVehiculo(); 
+        taller.configurarVehiculo(rutaArchivo); 
     }
 
     public Vehiculo getVehiculo() {

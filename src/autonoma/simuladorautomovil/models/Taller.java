@@ -55,8 +55,8 @@ public class Taller {
      * Configura el vehículo leyendo el archivo de configuración
      * @throws IOException si hay un problema leyendo el archivo
      */
-    public void configurarVehiculo() throws IOException {
-        ArrayList<String> lineas = lector.leer("config.csv");
+    public void configurarVehiculo(String rutaArchivo) throws IOException {
+        ArrayList<String> lineas = lector.leer(rutaArchivo);
 
         String tipoLlanta = "";
         String tipoMotor = "";
@@ -83,23 +83,24 @@ public class Taller {
     public void guardarConfiguracion() throws IOException {
         ArrayList<String> contenido = new ArrayList<>();
         contenido.add("llantas " + vehiculo.getLlantas().getTipoLlanta());
-        contenido.add("motor " + vehiculo.getMotor().getTipoMotor());
+        contenido.add("motor " + vehiculo.getMotor().getCilindraje());
 
         escritor.escribir(contenido);
     }
 
     private Llanta crearLlantaPorTipo(String tipo) {
-        switch (tipo.toLowerCase()) {
-            case "buenas":
-                return new Llanta("Buenas", 110);
-            case "bonitas":
-                return new Llanta("Bonitas", 70);
-            case "baratas":
-                return new Llanta("Baratas", 50);
-            default:
-                throw new IllegalArgumentException("Tipo de llanta no válido: " + tipo);
-        }
+       switch (tipo.toLowerCase()) {
+        case "buenas":
+            return new Llanta(110, "Buenas");
+        case "bonitas":
+            return new Llanta(70, "Bonitas");
+        case "baratas":
+            return new Llanta(50, "Baratas");
+        default:
+            System.out.println("Tipo de llanta no reconocido: " + tipo);
+            return new Llanta(0, "Desconocida");
     }
+}
 
     private Motor crearMotorPorTipo(String tipo) {
         switch (tipo) {
