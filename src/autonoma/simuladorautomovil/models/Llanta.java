@@ -42,16 +42,24 @@ public class Llanta {
 
     /**
      * Establece una nueva velocidad máxima recomendada para la llanta.
-     * @param velocidadMaxima Retorna la velocidadMaxima Nueva velocidad máxima en km/h.
+     * @param velocidadMaxima Es la velocidadMaxima Nueva velocidad máxima en km/h.
      */
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
     }
 
+    /**
+     * Obtiene el tipo de llanta.
+     * @return Retorna el tipo de llanta del vehículo.
+     */
     public String getTipoLlanta() {
         return tipoLlanta;
     }
 
+    /**
+     * Establece una nueva velocidad máxima recomendada para la llanta
+     * @param tipoLlanta Es el tipo de llanta del vehículo.
+     */
     public void setTipoLlanta(String tipoLlanta) {
         this.tipoLlanta = tipoLlanta;
     }
