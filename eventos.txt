@@ -4,13 +4,3 @@ Vehículo encendido.
 Aceleró a 50 km/h.
 Frenó a 30 km/h.
 Vehículo apagado.
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-¡Piiip piiip!
-Error al frenar: El vehiculo ya esta apagado
-Intento de frenado brusco con el vehículo apagado.
-Error al verificar llantas: El vehiculo ya esta apagado
-Error al apagar: El vehiculo ya esta apagado
-Error al acelerar: El vehiculo ya esta apagado
-Vehículo encendido correctamente.
