@@ -21,6 +21,9 @@ public class Llanta {
      */
     private int velocidadMaxima;
     
+    /**
+     * Es el tipo de llantas que tiene el vehículo.
+     */
     private String tipoLlanta;
 
     /**

@@ -91,11 +91,11 @@ public class Taller {
     private Llanta crearLlantaPorTipo(String tipo) {
         switch (tipo.toLowerCase()) {
             case "buenas":
-                return new Llanta("Buenas", 110);
+                return new Llanta(110, "Buenas");
             case "bonitas":
-                return new Llanta("Bonitas", 70);
+                return new Llanta(70, "Bonitas");
             case "baratas":
-                return new Llanta("Baratas", 50);
+                return new Llanta(50, "Baratas");
             default:
                 throw new IllegalArgumentException("Tipo de llanta no válido: " + tipo);
         }

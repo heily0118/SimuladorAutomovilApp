@@ -4,6 +4,8 @@
  */
 package autonoma.simuladorautomovil.models;
 
+import java.io.IOException;
+
 /**
  *
  * @author María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
@@ -22,7 +24,7 @@ public class Simulador {
         this.taller = new Taller(vehiculo, lector, escritor);
     }
 
-    public void iniciar(String rutaArchivo) {
+    public void iniciar(String rutaArchivo) throws IOException{
         taller.configurarVehiculo(); 
     }
 
