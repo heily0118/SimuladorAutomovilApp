@@ -699,8 +699,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void ConfigurarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfigurarVehiculoActionPerformed
            String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
-            String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
-             Vehiculo vehiculo = new Vehiculo();
+           String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
+           Vehiculo vehiculo = new Vehiculo();
            
     }//GEN-LAST:event_ConfigurarVehiculoActionPerformed
 

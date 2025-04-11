@@ -94,22 +94,21 @@ public class Vehiculo {
         this.motor = motor;
     }
 
-    /**
-     * Verifica si el vehículo está encendido.
-     * @return Retorna true si está encendido y false si está apagado.
-     */
-   
 
     /**
-     * Cambia el estado de encendido del vehículo.
-     * @return  estaEncendido
+     * Obtiene el estado de encendido del vehículo.
+     * @return Retorna true si el vehículo está encendido, false en caso contrario.
      */
     public boolean estaEncendido() {
-      return estaEncendido;
+        return estaEncendido;
     }
 
+    /**
+     * Establece el estado de encendido del vehículo.
+     * @param estaEncendido Paramtero booleano en donde si es true se utiliza para encender el vehículo, false para apagarlo.
+     */
     public void setEstaEncendido(boolean estaEncendido) {
-    this.estaEncendido = estaEncendido;
+        this.estaEncendido = estaEncendido;
     }
 
     
@@ -252,7 +251,11 @@ public class Vehiculo {
         return (estaEncendido ? "Encendido" : "Apagado");
     }
     
+    /**
+     * Verifica si el vehículo ha sido configurado correctamente.
+     * @return Retorna true si el vehículo tiene llantas y motor asignados y false en caso contrario.
+     */
     public boolean estaConfigurado() {
-    return llantas != null && motor != null;
-}
+        return llantas != null && motor != null;
+    }
 }

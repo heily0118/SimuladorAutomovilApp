@@ -83,11 +83,19 @@ public class Motor {
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
     }
-
+    
+    /**
+     * Obtiene el tipo de motor.
+     * @return Retorna una cadena que representa el tipo de motor.
+     */
     public String getTipoMotor() {
         return tipoMotor;
     }
 
+    /**
+     * Establece el tipo de motor.
+     * @param tipoMotor Es la cadena que representa el nuevo tipo de motor.
+     */
     public void setTipoMotor(String tipoMotor) {
         this.tipoMotor = tipoMotor;
     }
