@@ -4,22 +4,13 @@ Vehículo encendido.
 Aceleró a 50 km/h.
 Frenó a 30 km/h.
 Vehículo apagado.
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+¡Piiip piiip!
+Error al frenar: El vehiculo ya esta apagado
+Intento de frenado brusco con el vehículo apagado.
+Error al verificar llantas: El vehiculo ya esta apagado
+Error al apagar: El vehiculo ya esta apagado
+Error al acelerar: El vehiculo ya esta apagado
 Vehículo encendido correctamente.
-Aceleró a 10 km/h
-Aceleró a 20 km/h
-Verificación de llantas: Llanta bonita en buen estado (2% desgaste)
-Aceleró a 30 km/h
-Verificación de llantas: Llanta bonita en buen estado (4% desgaste)
-Aceleró a 40 km/h
-Verificación de llantas: Llanta bonita en buen estado (6% desgaste)
-Aceleró a 50 km/h
-Verificación de llantas: Llanta bonita en buen estado (8% desgaste)
-Aceleró a 60 km/h
-Verificación de llantas: Llanta bonita en buen estado (13% desgaste)
-Aceleró a 70 km/h
-Se alcanzó la velocidad permitida. ¡Peligro de accidente!
-Verificación de llantas: Llanta bonita en buen estado (18% desgaste)
-Se alcanzó la velocidad permitida. ¡Peligro de accidente!
-Verificación de llantas: Llanta bonita en buen estado (23% desgaste)
-Se alcanzó la velocidad permitida. ¡Peligro de accidente!
-Verificación de llantas: Llanta bonita en buen estado (28% desgaste)
