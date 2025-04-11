@@ -15,69 +15,76 @@ import java.util.ArrayList;
  * @version 1.0.0
  */
 public class Taller {
-
     private Vehiculo vehiculo;
+    private Lector lector;
+    private Escritor escritor;
 
-    public Taller() {
-        this.vehiculo = new Vehiculo();
-    }
-
-    public Vehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo) {
+    public Taller(Vehiculo vehiculo, Lector lector, Escritor escritor) {
         this.vehiculo = vehiculo;
+        this.lector = lector;
+        this.escritor = escritor;
     }
 
-    public String configurarLlantas(String tipo) {
-        int velocidadMax;
-        switch (tipo.toLowerCase()) {
-            case "baratas":
-                velocidadMax = 50;
-                break;
-            case "bonitas":
-                velocidadMax = 70;
-                break;
-            case "buenas":
-                velocidadMax = 110;
-                break;
-            default:
-                return "Tipo de llanta no reconocido.";
+    /**
+     * Configura el vehículo leyendo el archivo de configuración
+     * @throws IOException si hay un problema leyendo el archivo
+     */
+    public void configurarVehiculo() throws IOException {
+        ArrayList<String> lineas = lector.leer("config.csv");
+
+        String tipoLlanta = "";
+        String tipoMotor = "";
+
+        for (String linea : lineas) {
+            if (linea.toLowerCase().startsWith("llantas")) {
+                tipoLlanta = linea.split(" ")[1];
+            } else if (linea.toLowerCase().startsWith("motor")) {
+                tipoMotor = linea.split(" ")[1];
+            }
         }
 
-        Llanta llanta = new Llanta(velocidadMax, tipo);
-        vehiculo.setLlantas(llanta);
-        return "Llantas configuradas correctamente.";
-    }
+        Llanta llanta = crearLlantaPorTipo(tipoLlanta);
+        Motor motor = crearMotorPorTipo(tipoMotor);
 
-    public String configurarMotor(String cilindraje) {
-        int velocidadMax;
-        switch (cilindraje.toLowerCase()) {
-            case "1.0":
-                velocidadMax = 60;
-                break;
-            case "1.6":
-                velocidadMax = 100;
-                break;
-            case "2.0":
-                velocidadMax = 140;
-                break;
-            default:
-                return "Cilindraje no reconocido.";
-        }
-
-        Motor motor = new Motor(cilindraje, velocidadMax);
+        vehiculo.setLlanta(llanta);
         vehiculo.setMotor(motor);
-        return "Motor configurado correctamente.";
     }
 
-    public ArrayList<String> generarDatosVehiculo() {
-        ArrayList<String> datos = new ArrayList<>();
-        datos.add("Motor:" + vehiculo.getMotor().getCilindraje());
-        datos.add("VelocidadMotor:" + vehiculo.getMotor().getVelocidadMaxima());
-        datos.add("Llanta:" + vehiculo.getLlantas().getTipoLlanta());
-        datos.add("VelocidadLlanta:" + vehiculo.getLlantas().getVelocidadMaxima());
-        return datos;
+    /**
+     * Guarda la configuración actual del vehículo en el archivo
+     * @throws IOException si hay un problema escribiendo el archivo
+     */
+    public void guardarConfiguracion() throws IOException {
+        ArrayList<String> contenido = new ArrayList<>();
+        contenido.add("llantas " + vehiculo.getLlantas().getTipoLlanta());
+        contenido.add("motor " + vehiculo.getMotor().getTipoMotor());
+
+        escritor.escribir(contenido);
+    }
+
+    private Llanta crearLlantaPorTipo(String tipo) {
+        switch (tipo.toLowerCase()) {
+            case "buenas":
+                return new Llanta("Buenas", 110);
+            case "bonitas":
+                return new Llanta("Bonitas", 70);
+            case "baratas":
+                return new Llanta("Baratas", 50);
+            default:
+                throw new IllegalArgumentException("Tipo de llanta no válido: " + tipo);
+        }
+    }
+
+    private Motor crearMotorPorTipo(String tipo) {
+        switch (tipo) {
+            case "1000":
+                return new Motor("1000 cc", 100);
+            case "2000":
+                return new Motor("2000 cc", 160);
+            case "3000":
+                return new Motor("3000 cc", 220);
+            default:
+                throw new IllegalArgumentException("Tipo de motor no válido: " + tipo);
+        }
     }
 }
