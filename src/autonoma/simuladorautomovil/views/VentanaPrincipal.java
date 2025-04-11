@@ -12,6 +12,7 @@ import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
 import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.Motor;
+import autonoma.simuladorautomovil.models.Simulador;
 import javax.swing.ImageIcon;
 import autonoma.simuladorautomovil.models.Vehiculo;
 import java.io.BufferedInputStream;
@@ -38,6 +39,7 @@ import javax.swing.JOptionPane;
 public class VentanaPrincipal extends javax.swing.JFrame {
     
    private Vehiculo vehiculo;
+   private Simulador simulador;
    private Motor motor;
    private ArrayList<String> eventos = new ArrayList<>();
   
@@ -47,14 +49,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal(Vehiculo vehiculo, ArrayList<String> eventos) {
+    public VentanaPrincipal(Simulador simulador) {
         initComponents();
         setSize(1100, 900);
         setResizable(false);
         this.setLocationRelativeTo(null);
 
-        this.vehiculo = vehiculo;
-        this.eventos = eventos;
+        this.simulador = simulador;
+       
 
    
 

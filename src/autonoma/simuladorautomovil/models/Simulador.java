@@ -12,5 +12,23 @@ package autonoma.simuladorautomovil.models;
  * @version 1.0.0
  */
 public class Simulador {
-    
+    private Vehiculo vehiculo;
+    private Taller taller;
+
+    public Simulador() {
+        this.vehiculo = new Vehiculo(); 
+        Lector lector = new LectorArchivoTextoPlano();
+        Escritor escritor = new EscritorArchivoTextoPlano("config.csv");
+        this.taller = new Taller(vehiculo, lector, escritor);
+    }
+
+    public void iniciar(String rutaArchivo) {
+        taller.configurarVehiculo(); 
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
 }
+

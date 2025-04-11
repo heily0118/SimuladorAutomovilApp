@@ -56,12 +56,11 @@ public class Vehiculo {
      * @param llantas Son las llantas del vehículo.
      * @param motor Es el motor del vehículo.
      */
-    public Vehiculo(Llanta llantas, Motor motor) {
-        this.llantas = llantas;
-        this.motor = motor;
-        this.estaEncendido = false;
-        this.velocidadActual = 0;
+    public Vehiculo() {
+       
     }
+
+   
 
     /**
      * Obtiene las llantas del vehículo.
@@ -252,4 +251,8 @@ public class Vehiculo {
     public String mostrarEstado() {
         return (estaEncendido ? "Encendido" : "Apagado");
     }
+    
+    public boolean estaConfigurado() {
+    return llantas != null && motor != null;
+}
 }

@@ -46,7 +46,7 @@ public class Taller {
         Llanta llanta = crearLlantaPorTipo(tipoLlanta);
         Motor motor = crearMotorPorTipo(tipoMotor);
 
-        vehiculo.setLlanta(llanta);
+        vehiculo.setLlantas(llanta);
         vehiculo.setMotor(motor);
     }
 
