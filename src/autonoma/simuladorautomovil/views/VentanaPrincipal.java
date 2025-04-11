@@ -564,6 +564,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
+        if (vehiculo == null) {
+          JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
         try {
             motor.encender();  
 
@@ -609,6 +615,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_estadoAutoActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
+        if (vehiculo == null) {
+            JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         try {
             motor.apagar();
 
