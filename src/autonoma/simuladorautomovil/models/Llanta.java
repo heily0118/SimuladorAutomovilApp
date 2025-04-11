@@ -29,8 +29,9 @@ public class Llanta {
     /**
      * Constructor de la clase Llanta.
      */
-    public Llanta() {
-        
+    public Llanta(int velocidadMaxima, String tipoLlanta) {    
+        this.velocidadMaxima = velocidadMaxima;
+        this.tipoLlanta = tipoLlanta;
     }
 
     /**

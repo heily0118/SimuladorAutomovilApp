@@ -62,7 +62,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         this.simulador = simulador;
         
-
+        motor = new Motor("1000 cc", 100);
+        motor = new Motor("2000 cc", 160);
+        motor = new Motor("3000 cc", 220);
+       
+        
    
 
         try {
@@ -702,7 +706,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
             String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
 
-            Vehiculo vehiculo = new Vehiculo();
+            this.vehiculo = new Vehiculo();
             Lector lector = new LectorArchivoTextoPlano();
             Escritor escritor = new EscritorArchivoTextoPlano("config.csv");
             Taller taller = new Taller(vehiculo, lector, escritor);
@@ -718,6 +722,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 
                 taller.configurarVehiculo("config.csv");
+                
+                this.motor = this.vehiculo.getMotor();
 
                 JOptionPane.showMessageDialog(null, "Vehículo configurado exitosamente.");
             } catch (IOException e) {

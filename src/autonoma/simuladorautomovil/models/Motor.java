@@ -47,7 +47,9 @@ public class Motor {
      * Constructor de la clase Motor
      * 
      */
-    public Motor() {
+    public Motor(String tipoMotor, int velocidadMaxima) {    
+        this.velocidadMaxima = velocidadMaxima;
+        this.tipoMotor = tipoMotor;
     }
 
     /**

@@ -1,1 +1,4 @@
-Error general al encender: Cannot invoke "autonoma.simuladorautomovil.models.Motor.encender()" because "this.motor" is null
+Vehículo encendido correctamente.
+Vehículo apagado correctamente.
+Vehículo encendido correctamente.
+Error al acelerar: El vehiculo ya esta apagado
