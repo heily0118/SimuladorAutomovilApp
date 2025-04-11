@@ -4,6 +4,9 @@
  */
 package autonoma.simuladorautomovil.models;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  *@author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
@@ -12,12 +15,11 @@ package autonoma.simuladorautomovil.models;
  * @version 1.0.0
  */
 public class Taller {
-    
-  
-   private Vehiculo vehiculo;
 
-    public Taller(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
+    private Vehiculo vehiculo;
+
+    public Taller() {
+        this.vehiculo = new Vehiculo();
     }
 
     public Vehiculo getVehiculo() {
@@ -27,51 +29,55 @@ public class Taller {
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
-    
-    
-    
-    public String configurarLlantas(String tipo){
-        Llanta llanta;
 
+    public String configurarLlantas(String tipo) {
+        int velocidadMax;
         switch (tipo.toLowerCase()) {
-            case "buena":
-                llanta = new Llanta(110, "Buena");
+            case "baratas":
+                velocidadMax = 50;
                 break;
-            case "bonita":
-                llanta = new Llanta(70, "Bonita");
+            case "bonitas":
+                velocidadMax = 70;
                 break;
-            case "barata":
-                llanta = new Llanta(50, "Barata");
-                break;
-            default:
-                return "Tipo de llanta inválido: " + tipo;
-        }
-
-        this.vehiculo.setLlantas(llanta);
-        return "Llanta configurada: " + llanta.getTipoLlanta();
-    }
-    
-    public String configurarMotor(String cilindraje){
-        Motor motor;
-
-        switch (cilindraje) {
-            case "1000":
-                motor = new Motor("1000", 100);
-                break;
-            case "2000":
-                motor = new Motor("2000", 160);
-                break;
-            case "3000":
-                motor = new Motor("3000", 220);
+            case "buenas":
+                velocidadMax = 110;
                 break;
             default:
-                return "Cilindraje de motor inválido: " + cilindraje;
+                return "Tipo de llanta no reconocido.";
         }
 
-        this.vehiculo.setMotor(motor);
-        return "Motor configurado: " + motor.getCilindraje();
-    
+        Llanta llanta = new Llanta(velocidadMax, tipo);
+        vehiculo.setLlantas(llanta);
+        return "Llantas configuradas correctamente.";
     }
-    
-    
+
+    public String configurarMotor(String cilindraje) {
+        int velocidadMax;
+        switch (cilindraje.toLowerCase()) {
+            case "1.0":
+                velocidadMax = 60;
+                break;
+            case "1.6":
+                velocidadMax = 100;
+                break;
+            case "2.0":
+                velocidadMax = 140;
+                break;
+            default:
+                return "Cilindraje no reconocido.";
+        }
+
+        Motor motor = new Motor(cilindraje, velocidadMax);
+        vehiculo.setMotor(motor);
+        return "Motor configurado correctamente.";
+    }
+
+    public ArrayList<String> generarDatosVehiculo() {
+        ArrayList<String> datos = new ArrayList<>();
+        datos.add("Motor:" + vehiculo.getMotor().getCilindraje());
+        datos.add("VelocidadMotor:" + vehiculo.getMotor().getVelocidadMaxima());
+        datos.add("Llanta:" + vehiculo.getLlantas().getTipoLlanta());
+        datos.add("VelocidadLlanta:" + vehiculo.getLlantas().getVelocidadMaxima());
+        return datos;
+    }
 }
