@@ -46,7 +46,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    private Vehiculo vehiculo;
    private Simulador simulador;
    private Motor motor;
-   private ArrayList<String> eventos = new ArrayList<>();
+ 
   
  
   
@@ -75,18 +75,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             System.out.println("Imagen no encontrada");
         }
         
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
-        @Override
-        public void windowClosing(java.awt.event.WindowEvent e) {
-            try {
-                EscritorArchivoTextoPlano escritor = new EscritorArchivoTextoPlano("eventos.txt");
-                escritor.escribir(eventos);
-                System.out.println("Eventos guardados al cerrar ventana.");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error guardando eventos al cerrar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    });
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -549,13 +538,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if (velocidadActual < velocidadMaxima) {
                 vehiculo.acelerar(velocidadAcelerar);
                 reproducirSonidoAceleracion();
-                eventos.add("Aceleró a " + vehiculo.getVelocidadActual() + " km/h");
+               
                 Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
                 System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
             }
 
             if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
-                eventos.add("Se alcanzó la velocidad permitida. ¡Peligro de accidente!");
+               
                 reproducirSonidoChoque(); 
 
                ChoqueCarro choque = new ChoqueCarro(this, true);
@@ -564,10 +553,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         } catch (VehiculoApagadoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-            eventos.add("Intento de acelerar con el vehículo apagado.");
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            eventos.add("Error al acelerar: " + e.getMessage());
+           
         }
     }//GEN-LAST:event_AcelerarActionPerformed
 
@@ -581,7 +570,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             motor.encender();  
 
-            eventos.add("Vehículo encendido correctamente."); 
+         
 
             Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
             estadoAuto.setText(motor.mostrarEstado());
@@ -609,10 +598,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (VehiculoEncendidoException vee) {
-            eventos.add("Intento de encender: " + vee.getMessage());
+           
             JOptionPane.showMessageDialog(this, vee.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
-            eventos.add("Error general al encender: " + e.getMessage());
+          
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -631,8 +620,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             motor.apagar();
 
-            eventos.add("Vehículo apagado correctamente.");
-
+            
        
             estadoAuto.setText(motor.mostrarEstado());
             Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
@@ -644,7 +632,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
-            eventos.add("Error al apagar: " + e.getMessage());
+            
         }
     }//GEN-LAST:event_apagarActionPerformed
 
@@ -675,7 +663,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         String resultado = vehiculo.frenar(cantidadFrenar);
 
-        eventos.add("Frenó: " + resultado);
+       
         Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
         JOptionPane.showMessageDialog(this, resultado);
 
@@ -683,13 +671,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
     } catch (VehiculoDetenidoException e) {
         JOptionPane.showMessageDialog(this, "El vehículo ya está detenido.", "Atención", JOptionPane.WARNING_MESSAGE);
-        eventos.add("Intento de frenar cuando ya estaba detenido.");
+       
     } catch (VehiculoApagadoException | PatinajeException e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-        eventos.add("Error al frenar: " + e.getMessage());
+        
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        eventos.add("Error inesperado: " + e.getMessage());
+        
     }
     }//GEN-LAST:event_frenarActionPerformed
 
@@ -705,17 +693,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             reproducirSonidoFrenadoBrusco(); 
 
-            eventos.add("Frenado brusco: " + resultado);
+           
             Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
 
             JOptionPane.showMessageDialog(this, resultado, "Frenado Brusco", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (VehiculoApagadoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
-            eventos.add("Intento de frenado brusco con el vehículo apagado.");
+           
         } catch (VehiculoDetenidoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
-            eventos.add("Intento de frenado brusco estando detenido.");
+            
         } catch (PatinajeException e) {
             reproducirSonidoChoque(); 
 
@@ -723,10 +711,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             choque.setVisible(true);
 
             JOptionPane.showMessageDialog(this, e.getMessage());
-            eventos.add("¡Frenado brusco fallido! El vehículo patinó.");
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error desconocido", JOptionPane.ERROR_MESSAGE);
-            eventos.add("Error inesperado al frenar bruscamente: " + e.getMessage());
+           
         }
 
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
@@ -765,7 +753,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void PitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PitoActionPerformed
        reproducirSonidoPito();
-       eventos.add("¡Piiip piiip!");
+     
     }//GEN-LAST:event_PitoActionPerformed
 
     private void reproducirSonidoChoque() {
