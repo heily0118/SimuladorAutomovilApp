@@ -4,3 +4,5 @@ Vehículo encendido.
 Aceleró a 50 km/h.
 Frenó a 30 km/h.
 Vehículo apagado.
+¡Piiip piiip!
+Intento de frenado brusco con el vehículo apagado.
