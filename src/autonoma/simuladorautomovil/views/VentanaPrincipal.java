@@ -4,9 +4,7 @@
  */
 package autonoma.simuladorautomovil.views;
 
-import autonoma.simuladorautomovil.exceptions.KilometrajeInsuficienteException;
 import autonoma.simuladorautomovil.exceptions.PatinajeException;
-import autonoma.simuladorautomovil.exceptions.TerrenoIrregularException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
@@ -19,16 +17,14 @@ import autonoma.simuladorautomovil.models.Simulador;
 import autonoma.simuladorautomovil.models.Taller;
 import javax.swing.ImageIcon;
 import autonoma.simuladorautomovil.models.Vehiculo;
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.JLabel;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,29 +50,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal(Simulador simulador) {
-        initComponents();
-        setSize(1100, 900);
-        setResizable(false);
-        this.setLocationRelativeTo(null);
+ public VentanaPrincipal(Simulador simulador) {
+    initComponents();
+    setSize(1100, 900);
+    setResizable(false);
+    this.setLocationRelativeTo(null);
 
-        this.simulador = simulador;
-        
-        motor = new Motor("1000 cc", 100);
-        motor = new Motor("2000 cc", 160);
-        motor = new Motor("3000 cc", 220);
-       
-        
-   
+    this.simulador = simulador;
 
-        try {
-            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
-        } catch (NullPointerException e) {
-            System.out.println("Imagen no encontrada");
-        }
-        
-        
+    try {
+        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simuladorautomovil/images/Automovil.png")).getImage());
+    } catch (NullPointerException e) {
+        System.out.println("Imagen no encontrada");
     }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -537,7 +524,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             if (velocidadActual < velocidadMaxima) {
                 vehiculo.acelerar(velocidadAcelerar);
-                reproducirSonidoAceleracion();
+                reproducirSonido("/autonoma/simuladorautomovil/sounds/aceleracion.wav");
                
                 Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
                 System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
@@ -545,7 +532,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
                
-                reproducirSonidoChoque(); 
+                reproducirSonido("/autonoma/simuladorautomovil/sounds/videoChoque.wav"); 
 
                ChoqueCarro choque = new ChoqueCarro(this, true);
                choque.setVisible(true);
@@ -561,50 +548,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
-        if (vehiculo == null) {
-          JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        
-        try {
-            motor.encender();  
+          if (vehiculo == null) {
+        JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-         
+    try {
+        motor.encender();  
 
-            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-            estadoAuto.setText(motor.mostrarEstado());
+        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+        estadoAuto.setText(motor.mostrarEstado());
 
-            new Thread(() -> {
-            try {
-                URL sonidoURL = getClass().getResource("/autonoma/simuladorautomovil/sounds/EncenderAuto.wav");
+        reproducirSonido("/autonoma/simuladorautomovil/sounds/EncenderAuto.wav");
 
-                if (sonidoURL == null) {
-                    throw new RuntimeException("No se encontró el archivo de sonido.");
-                }
+        EncenderCarro encender = new EncenderCarro(this, true);
+        encender.setVisible(true);
 
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonidoURL);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInputStream);
-                clip.start();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            }).start();
+        JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
 
-            EncenderCarro encender = new EncenderCarro(this, true);
-            encender.setVisible(true);
-
-            JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (VehiculoEncendidoException vee) {
-           
-            JOptionPane.showMessageDialog(this, vee.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-        } catch (Exception e) {
-          
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
+    } catch (VehiculoEncendidoException vee) {
+        JOptionPane.showMessageDialog(this, vee.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_EncenderActionPerformed
 
     private void estadoAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoAutoActionPerformed
@@ -620,12 +586,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             motor.apagar();
 
-            
-       
+           
             estadoAuto.setText(motor.mostrarEstado());
             Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
-
-      
 
       
             JOptionPane.showMessageDialog(this, "El vehículo se ha apagado exitosamente.", "Apagado", JOptionPane.INFORMATION_MESSAGE);
@@ -691,7 +654,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             int cantidadFrenar = vehiculo.getVelocidadActual(); 
             String resultado = vehiculo.frenarAutoBruscamente(cantidadFrenar);
 
-            reproducirSonidoFrenadoBrusco(); 
+            reproducirSonido("/autonoma/simuladorautomovil/sounds/frenoBrusco.wav"); 
 
            
             Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
@@ -705,7 +668,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
             
         } catch (PatinajeException e) {
-            reproducirSonidoChoque(); 
+            reproducirSonido("/autonoma/simuladorautomovil/sounds/videoChoque.wav"); 
 
             ChoqueCarro choque = new ChoqueCarro(this, true);
             choque.setVisible(true);
@@ -752,56 +715,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_ConfigurarVehiculoActionPerformed
 
     private void PitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PitoActionPerformed
-       reproducirSonidoPito();
+       reproducirSonido("/autonoma/simuladorautomovil/sounds/pito.wav");
      
     }//GEN-LAST:event_PitoActionPerformed
-
-    private void reproducirSonidoChoque() {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/autonoma/simuladorautomovil/sounds/videoChoque.wav"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido: " + e.getMessage());
-        }
+    public void reproducirSonido(String ruta) {
+    try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(ruta));
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start(); 
+    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        e.printStackTrace();
     }
-    
-    private void reproducirSonidoFrenadoBrusco() {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                getClass().getResource("/autonoma/simuladorautomovil/sounds/frenoBrusco.wav"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido del frenado: " + e.getMessage());
-        }
-    }
-
-    private void reproducirSonidoAceleracion() {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                getClass().getResource("/autonoma/simuladorautomovil/sounds/aceleracion.wav"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de aceleración: " + e.getMessage());
-        }
-    }
-    
-    private void reproducirSonidoPito() {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                getClass().getResource("/autonoma/simuladorautomovil/sounds/pito.wav"));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo reproducir el sonido de pito: " + e.getMessage());
-        }
-    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Acelerar;
     private javax.swing.JToggleButton ConfigurarVehiculo;

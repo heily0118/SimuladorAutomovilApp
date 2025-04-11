@@ -12,6 +12,7 @@ import autonoma.simuladorautomovil.exceptions.LimiteDeVelocidadExcedidoException
 import autonoma.simuladorautomovil.exceptions.PatinajeException;
 import autonoma.simuladorautomovil.exceptions.TerrenoIrregularException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
+import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
 /**
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
@@ -105,7 +106,7 @@ public class Vehiculo {
      */
     public String encender() {
         if (!estaConfigurado()) {
-            return "Debe configurar el vehículo antes de encenderlo.";
+            throw new VehiculoNoConfiguradoException(); 
         }
         return motor.encender();
     }
