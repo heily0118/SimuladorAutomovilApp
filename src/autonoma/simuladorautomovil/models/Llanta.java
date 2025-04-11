@@ -101,9 +101,8 @@ public class Llanta {
                     System.out.println("Las llantas baratas del vehículo están patinando.");
                 }
                 break;
-            default:
-                velocidadMaxima = 0; 
-                System.out.println("Tipo de llanta no reconocido: " + tipoLlanta);
+           default:
+                throw new IllegalArgumentException("Tipo de llanta no reconocido: " + tipoLlanta);
         }
     }
 }

@@ -121,20 +121,18 @@ public class Taller {
      * @param tipo Tipo de llanta (buenas, bonitas, baratas).
      * @return Una instancia de Llanta con sus características correspondientes.
      */
-    private Llanta crearLlantaPorTipo(String tipo) {
-        switch (tipo.toLowerCase()) {
-            case "buenas":
-                return new Llanta(110, "Buenas");
-            case "bonitas":
-                return new Llanta(70, "Bonitas");
-            case "baratas":
-                return new Llanta(50, "Baratas");
-            default:
-                System.out.println("Tipo de llanta no reconocido: " + tipo);
-                return new Llanta(0, "Desconocida");
-        }
-    }
-
+        private Llanta crearLlantaPorTipo(String tipo) {
+         switch (tipo.toLowerCase()) {
+             case "buenas":
+                 return new Llanta(110, "Buenas");
+             case "bonitas":
+                 return new Llanta(70, "Bonitas");
+             case "baratas":
+                 return new Llanta(50, "Baratas");
+             default:
+                 throw new IllegalArgumentException("Tipo de llanta no reconocido: " + tipo);
+         }
+     }
     /**
      * Crea una instancia de Motor según el tipo de cilindraje especificado.
      * 
