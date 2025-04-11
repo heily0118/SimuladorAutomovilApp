@@ -12,6 +12,7 @@ import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
 import autonoma.simuladorautomovil.models.Escritor;
 import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
+import autonoma.simuladorautomovil.models.Lector;
 import autonoma.simuladorautomovil.models.LectorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.Motor;
 import autonoma.simuladorautomovil.models.Simulador;
@@ -698,10 +699,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
 
     private void ConfigurarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfigurarVehiculoActionPerformed
-           String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
-           String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
-           Vehiculo vehiculo = new Vehiculo();
-           
+            String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
+            String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
+
+            Vehiculo vehiculo = new Vehiculo();
+            Lector lector = new LectorArchivoTextoPlano();
+            Escritor escritor = new EscritorArchivoTextoPlano("config.csv");
+            Taller taller = new Taller(vehiculo, lector, escritor);
+
+            
+           ArrayList<String> contenido = new ArrayList<>();
+           contenido.add("llantas;" + llantaSeleccionada.toLowerCase());
+           contenido.add("motor;" + motorSeleccionado);
+
+            try {
+               
+                escritor.escribir(contenido);
+
+
+                taller.configurarVehiculo("config.csv");
+
+                JOptionPane.showMessageDialog(null, "Vehículo configurado exitosamente.");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al configurar el vehículo: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(null, "Configuración inválida: " + e.getMessage());
+            }
+
     }//GEN-LAST:event_ConfigurarVehiculoActionPerformed
 
     private void PitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PitoActionPerformed
