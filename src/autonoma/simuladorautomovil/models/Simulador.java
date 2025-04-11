@@ -24,8 +24,9 @@ public class Simulador {
         this.taller = new Taller(vehiculo, lector, escritor);
     }
 
-    public void iniciar(String rutaArchivo) throws IOException{
-        taller.configurarVehiculo(); 
+    public void iniciar(String rutaArchivo) throws IOException {
+        taller.configurarVehiculo(rutaArchivo); 
+
     }
 
     public Vehiculo getVehiculo() {
