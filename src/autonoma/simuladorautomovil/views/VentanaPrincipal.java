@@ -8,6 +8,7 @@ import autonoma.simuladorautomovil.exceptions.PatinajeException;
 import autonoma.simuladorautomovil.exceptions.VehiculoApagadoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoDetenidoException;
 import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
+import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
 import autonoma.simuladorautomovil.models.Escritor;
 import autonoma.simuladorautomovil.models.EscritorArchivoTextoPlano;
 import autonoma.simuladorautomovil.models.Lector;
@@ -289,7 +290,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(estadoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -488,7 +489,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -548,29 +548,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
-          if (vehiculo == null) {
-        JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        
+        try {
+            if (vehiculo == null) {
+                throw new VehiculoNoConfiguradoException();
+            }    
+            motor.encender();  
 
-    try {
-        motor.encender();  
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+            estadoAuto.setText(motor.mostrarEstado());
 
-        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-        estadoAuto.setText(motor.mostrarEstado());
+            reproducirSonido("/autonoma/simuladorautomovil/sounds/EncenderAuto.wav");
 
-        reproducirSonido("/autonoma/simuladorautomovil/sounds/EncenderAuto.wav");
+            EncenderCarro encender = new EncenderCarro(this, true);
+            encender.setVisible(true);
 
-        EncenderCarro encender = new EncenderCarro(this, true);
-        encender.setVisible(true);
+            JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
 
-        JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
-
-    } catch (VehiculoEncendidoException vee) {
-        JOptionPane.showMessageDialog(this, vee.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        } catch(VehiculoNoConfiguradoException vee){
+            JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (VehiculoEncendidoException vee) {
+            JOptionPane.showMessageDialog(this, vee.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_EncenderActionPerformed
 
     private void estadoAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoAutoActionPerformed
@@ -719,14 +720,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      
     }//GEN-LAST:event_PitoActionPerformed
     public void reproducirSonido(String ruta) {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(ruta));
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start(); 
-    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-        e.printStackTrace();
-    }
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(ruta));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start(); 
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Acelerar;
