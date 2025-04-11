@@ -54,6 +54,18 @@ public class Simulador {
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
+    
+    public void setVehiculo(Vehiculo vehiculo){
+        this.vehiculo = vehiculo;
+    }
 
+    public Taller getTaller() {
+        return taller;
+    }
+
+    public void setTaller(Taller taller) {
+        this.taller = taller;
+    }
+    
 }
 

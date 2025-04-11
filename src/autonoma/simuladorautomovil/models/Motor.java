@@ -22,6 +22,7 @@ public class Motor {
      * Cilindraje del motor
      */
     private String cilindraje;
+    
     /**
      * Velocidad máxima en km/h.
      */
@@ -100,5 +101,36 @@ public class Motor {
         this.tipoMotor = tipoMotor;
     }
     
-    
+    /**
+     * Enciende el vehículo si no está encendido.
+     * @return Retorna el mensaje de confirmación (Encendido).
+     * @throws VehiculoEncendidoException Se lanza esta excepción si el vehículo ya está encendido.
+     */
+    public String encender(){
+        if (estaEncendido) {
+            throw new VehiculoEncendidoException();
+        }
+        estaEncendido = true;
+        return "Vehiculo encendido.";
+    }
+
+    /**
+     * Apaga el vehículo si está encendido y la velocidad es segura.
+     * @return Mensaje de confirmación (Apagado).
+     * @throws VehiculoApagadoException Se lanza esta excepción si ya está apagado.
+     * @throws AccidentePorAceleracionException Se lanza esta excepción si la velocidad es mayor a 60 km/h.
+     */
+    public String apagar() {
+        if (!estaEncendido) {
+            throw new VehiculoApagadoException();
+        }
+        
+        if (velocidadActual > 60) {
+            throw new AccidentePorAceleracionException();
+        }
+        estaEncendido = false;
+        velocidadActual = 0;
+        return "Vehiculo apagado.";
+    }
+
 }

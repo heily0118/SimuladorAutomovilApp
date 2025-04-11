@@ -1,1 +1,1 @@
-Error general al encender: Cannot invoke "autonoma.simuladorautomovil.models.Vehiculo.encender()" because "this.vehiculo" is null
+Vehículo encendido correctamente.
