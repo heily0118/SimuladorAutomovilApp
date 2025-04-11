@@ -537,13 +537,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
 
     } catch (VehiculoApagadoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
 
     } catch (LimiteDeVelocidadExcedidoException e) {
-        JOptionPane.showMessageDialog(this, "El vehículo ha superado el límite de velocidad permitido por las llantas.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
         
     } catch (VehiculoNoConfiguradoException e) {
-        JOptionPane.showMessageDialog(this, "El vehículo no está configurado. Asegúrate de configurar el motor y las llantas.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -568,10 +568,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "El vehículo se ha encendido exitosamente.", "Encendido", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch(VehiculoNoConfiguradoException vee){
-            JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (VehiculoEncendidoException vee) {
-            JOptionPane.showMessageDialog(this, vee.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } catch(VehiculoNoConfiguradoException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (VehiculoEncendidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -590,14 +590,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, mensaje, "Apagado", JOptionPane.INFORMATION_MESSAGE);
 
-    } catch (VehiculoNoConfiguradoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Vehículo no configurado", JOptionPane.ERROR_MESSAGE);
-
-    } catch (VehiculoApagadoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Ya estaba apagado", JOptionPane.WARNING_MESSAGE);
-
-    } catch (AccidentePorAceleracionException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "¡Peligro!", JOptionPane.WARNING_MESSAGE);
+    } catch (VehiculoNoConfiguradoException | VehiculoApagadoException | AccidentePorAceleracionException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
@@ -636,12 +630,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, resultado);
 
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
     } catch (VehiculoDetenidoException e) {
-        JOptionPane.showMessageDialog(this, "El vehículo ya está detenido.", "Atención", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
        
     } catch (VehiculoApagadoException | PatinajeException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
         
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
