@@ -122,6 +122,10 @@ public class Vehiculo {
         }
         velocidadActual += cantidad;
         motor.setVelocidadActual(velocidadActual);
+
+
+       llantas.verificarVelocidadMaxima(velocidadActual);
+
         return "Vehículo acelerado a " + velocidadActual + " km/h.";
     }
 
@@ -183,6 +187,9 @@ public class Vehiculo {
         velocidadActual -= cantidad;
         if (velocidadActual < 0) velocidadActual = 0;
         motor.setVelocidadActual(velocidadActual);
+
+        
+        llantas.verificarVelocidadMaxima(velocidadActual);
 
         if (velocidadActual == 0 && patinando) {
             return "El vehículo se ha detenido completamente y ha recuperado el control.";
