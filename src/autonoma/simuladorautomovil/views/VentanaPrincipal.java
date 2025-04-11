@@ -61,7 +61,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         this.simulador = simulador;
-       
+        
+        motor = new Motor("1000 cc", 100);
+        motor = new Motor("2000 cc", 160);
+        motor = new Motor("3000 cc", 220);
+        
+       vehiculo = new Vehiculo();
 
    
 
@@ -561,12 +566,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
         try {
-            vehiculo.encender();  
+            motor.encender();  
 
             eventos.add("Vehículo encendido correctamente."); 
 
             Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-            estadoAuto.setText(vehiculo.mostrarEstado());
+            estadoAuto.setText(motor.mostrarEstado());
 
             new Thread(() -> {
             try {
@@ -606,12 +611,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
         try {
-            vehiculo.apagar();
+            motor.apagar();
 
             eventos.add("Vehículo apagado correctamente.");
 
        
-            estadoAuto.setText(vehiculo.mostrarEstado());
+            estadoAuto.setText(motor.mostrarEstado());
             Velocidad.setText( + vehiculo.getVelocidadActual() + " km/h");
 
       

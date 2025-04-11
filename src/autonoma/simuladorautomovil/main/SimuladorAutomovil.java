@@ -22,7 +22,7 @@ import autonoma.simuladorautomovil.views.VentanaPrincipal;
  */
 public class SimuladorAutomovil {
     public static void main(String[] args) {
-       Simulador simulador = new Simulador(); 
+        Simulador simulador = new Simulador(); 
         VentanaPrincipal ventana = new VentanaPrincipal(simulador); 
         ventana.setVisible(true); 
     }

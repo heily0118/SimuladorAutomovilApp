@@ -51,16 +51,9 @@ public class Vehiculo {
      */
     private int velocidadActual;
 
-    /**
-     * Constructor de la clase Vehiculo.
-     * @param llantas Son las llantas del vehículo.
-     * @param motor Es el motor del vehículo.
-     */
     public Vehiculo() {
-       
+        
     }
-
-   
 
     /**
      * Obtiene las llantas del vehículo.
@@ -211,45 +204,6 @@ public class Vehiculo {
         return "Frenado exitoso. Velocidad actual: " + velocidadActual + " km/h.";
     }
     
-    /**
-     * Enciende el vehículo si no está encendido.
-     * @return Retorna el mensaje de confirmación (Encendido).
-     * @throws VehiculoEncendidoException Se lanza esta excepción si el vehículo ya está encendido.
-     */
-    public String encender(){
-        if (estaEncendido) {
-            throw new VehiculoEncendidoException();
-        }
-        estaEncendido = true;
-        return "Vehiculo encendido.";
-    }
-
-    /**
-     * Apaga el vehículo si está encendido y la velocidad es segura.
-     * @return Mensaje de confirmación (Apagado).
-     * @throws VehiculoApagadoException Se lanza esta excepción si ya está apagado.
-     * @throws AccidentePorAceleracionException Se lanza esta excepción si la velocidad es mayor a 60 km/h.
-     */
-    public String apagar() {
-        if (!estaEncendido) {
-            throw new VehiculoApagadoException();
-        }
-        
-        if (velocidadActual > 60) {
-            throw new AccidentePorAceleracionException();
-        }
-        estaEncendido = false;
-        velocidadActual = 0;
-        return "Vehiculo apagado.";
-    }
-
-    /**
-     * Muestra en consola el estado actual del vehículo.
-     * @return el esta del auto encendido o apagado
-     */
-    public String mostrarEstado() {
-        return (estaEncendido ? "Encendido" : "Apagado");
-    }
     
     /**
      * Verifica si el vehículo ha sido configurado correctamente.
