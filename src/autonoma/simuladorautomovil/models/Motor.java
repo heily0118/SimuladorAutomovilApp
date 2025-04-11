@@ -18,36 +18,39 @@ import autonoma.simuladorautomovil.exceptions.VehiculoEncendidoException;
  */
 
 public class Motor {
+
     /**
-     * Cilindraje del motor
+     * Cilindraje del motor.
      */
     private String cilindraje;
-    
+
     /**
-     * Velocidad máxima en km/h.
+     * Velocidad máxima en km/h que permite este motor.
      */
     private int velocidadMaxima;
-    
-     /**
+
+    /**
      * Indica si el vehículo está encendido (true) o apagado (false).
      */
     private boolean estaEncendido;
-    
+
     /**
      * Velocidad actual del vehículo en km/h.
      */
     private int velocidadActual;
-    
+
     /**
-     * Tipo de motor del vehículo.
+     * Tipo de motor del vehículo (por ejemplo, "1000 cc", "2000 cc", etc).
      */
     private String tipoMotor;
 
     /**
-     * Constructor de la clase Motor
+     * Constructor de la clase Motor.
      * 
+     * @param tipoMotor Tipo de motor (identificación o nombre).
+     * @param velocidadMaxima Velocidad máxima permitida por este motor.
      */
-    public Motor(String tipoMotor, int velocidadMaxima) {    
+    public Motor(String tipoMotor, int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
         this.tipoMotor = tipoMotor;
     }
@@ -62,7 +65,7 @@ public class Motor {
 
     /**
      * Establece el cilindraje del motor.
-     * @param cilindraje Es el cilindraje.
+     * @param cilindraje Es el nuevo cilindraje a establecer.
      */
     public void setCilindraje(String cilindraje) {
         this.cilindraje = cilindraje;
@@ -70,23 +73,23 @@ public class Motor {
 
     /**
      * Obtiene la velocidad máxima que puede alcanzar el motor.
-     * @return Retorna la velocidad máxima en km/h.
+     * @return Velocidad máxima en km/h.
      */
     public int getVelocidadMaxima() {
         return velocidadMaxima;
     }
 
     /**
-     * Establece la velocidad máxima que puede alcanzar el motor.
-     * @param velocidadMaxima Es la velocidad máxima en km/h.
+     * Establece la velocidad máxima del motor.
+     * @param velocidadMaxima Nueva velocidad máxima en km/h.
      */
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
     }
-    
+
     /**
      * Obtiene el tipo de motor.
-     * @return Retorna una cadena que representa el tipo de motor.
+     * @return Tipo de motor como cadena de texto.
      */
     public String getTipoMotor() {
         return tipoMotor;
@@ -94,18 +97,18 @@ public class Motor {
 
     /**
      * Establece el tipo de motor.
-     * @param tipoMotor Es la cadena que representa el nuevo tipo de motor.
+     * @param tipoMotor Nuevo tipo de motor.
      */
     public void setTipoMotor(String tipoMotor) {
         this.tipoMotor = tipoMotor;
     }
-    
+
     /**
      * Enciende el vehículo si no está encendido.
-     * @return Retorna el mensaje de confirmación (Encendido).
-     * @throws VehiculoEncendidoException Se lanza esta excepción si el vehículo ya está encendido.
+     * @return Mensaje de confirmación.
+     * @throws VehiculoEncendidoException Si el vehículo ya estaba encendido.
      */
-    public String encender(){
+    public String encender() {
         if (estaEncendido) {
             throw new VehiculoEncendidoException();
         }
@@ -114,30 +117,56 @@ public class Motor {
     }
 
     /**
-     * Apaga el vehículo si está encendido y la velocidad es segura.
-     * @return Mensaje de confirmación (Apagado).
-     * @throws VehiculoApagadoException Se lanza esta excepción si ya está apagado.
-     * @throws AccidentePorAceleracionException Se lanza esta excepción si la velocidad es mayor a 60 km/h.
+     * Apaga el vehículo si está encendido y la velocidad es segura (≤ 60 km/h).
+     * Reinicia la velocidad a 0 si es exitoso.
+     * 
+     * @return Mensaje de confirmación.
+     * @throws VehiculoApagadoException Si ya está apagado.
+     * @throws AccidentePorAceleracionException Si la velocidad es mayor a 60 km/h.
      */
     public String apagar() {
         if (!estaEncendido) {
             throw new VehiculoApagadoException();
         }
-        
+
         if (velocidadActual > 60) {
             throw new AccidentePorAceleracionException();
         }
+
         estaEncendido = false;
         velocidadActual = 0;
         return "Vehiculo apagado.";
     }
-    
+
     /**
-     * Muestra en consola el estado actual del vehículo.
-     * @return el esta del auto encendido o apagado
+     * Muestra el estado actual del motor como una cadena legible.
+     * @return "Encendido" o "Apagado" según el estado del motor.
      */
     public String mostrarEstado() {
-        return (estaEncendido ? "Encendido" : "Apagado");
+        return estaEncendido ? "Encendido" : "Apagado";
     }
 
+    /**
+     * Verifica si el motor está encendido.
+     * @return true si está encendido, false si está apagado.
+     */
+    public boolean estaEncendido() {
+        return estaEncendido;
+    }
+
+    /**
+     * Establece la velocidad actual del vehículo.
+     * @param velocidadActual Nueva velocidad en km/h.
+     */
+    public void setVelocidadActual(int velocidadActual) {
+        this.velocidadActual = velocidadActual;
+    }
+
+    /**
+     * Obtiene la velocidad actual del vehículo.
+     * @return Velocidad actual en km/h.
+     */
+    public int getVelocidadActual() {
+        return velocidadActual;
+    }
 }

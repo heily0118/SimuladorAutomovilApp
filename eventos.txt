@@ -1,1 +1,4 @@
 Vehículo encendido correctamente.
+Aceleró a 10 km/h
+Aceleró a 20 km/h
+Aceleró a 30 km/h
