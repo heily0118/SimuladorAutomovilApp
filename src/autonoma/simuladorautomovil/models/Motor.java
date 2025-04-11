@@ -45,12 +45,9 @@ public class Motor {
 
     /**
      * Constructor de la clase Motor
-     * @param cilindraje Es el cilindraje del motor.
-     * @param velocidadMaxima Es la velocidad máxima que puede alcanzar el motor.
+     * 
      */
-    public Motor(String cilindraje, int velocidadMaxima) {
-        this.cilindraje = cilindraje;
-        this.velocidadMaxima = velocidadMaxima;
+    public Motor() {
     }
 
     /**

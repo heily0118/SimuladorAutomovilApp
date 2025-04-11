@@ -61,11 +61,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         this.simulador = simulador;
         
-        motor = new Motor("1000 cc", 100);
-        motor = new Motor("2000 cc", 160);
-        motor = new Motor("3000 cc", 220);
-        
-       vehiculo = new Vehiculo();
 
    
 

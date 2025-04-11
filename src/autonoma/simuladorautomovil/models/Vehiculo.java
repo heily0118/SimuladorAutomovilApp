@@ -204,7 +204,6 @@ public class Vehiculo {
         return "Frenado exitoso. Velocidad actual: " + velocidadActual + " km/h.";
     }
     
-    
     /**
      * Verifica si el vehículo ha sido configurado correctamente.
      * @return Retorna true si el vehículo tiene llantas y motor asignados y false en caso contrario.

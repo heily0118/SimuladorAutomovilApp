@@ -28,11 +28,9 @@ public class Llanta {
 
     /**
      * Constructor de la clase Llanta.
-     * @param velocidadMaxima Es la velocidad máxima a la que se desgasta la llanta.
      */
-    public Llanta(int velocidadMaxima, String tipoLlanta) {
-        this.velocidadMaxima = velocidadMaxima;
-        this.tipoLlanta = tipoLlanta;
+    public Llanta() {
+        
     }
 
     /**

@@ -1,2 +1,1 @@
-Vehículo encendido correctamente.
-Vehículo apagado correctamente.
+Error general al encender: Cannot invoke "autonoma.simuladorautomovil.models.Motor.encender()" because "this.motor" is null
