@@ -89,11 +89,12 @@ public class Vehiculo {
      * @throws VehiculoApagadoException Si ya está apagado.
      * @throws AccidentePorAceleracionException Si se intenta apagar con velocidad > 60 km/h.
      */
-    public String apagar() {
-        String mensaje = motor.apagar();
-        this.velocidadActual = 0;
-        motor.setVelocidadActual(0);
-        return mensaje;
+    public String apagar() throws VehiculoApagadoException, AccidentePorAceleracionException, VehiculoNoConfiguradoException {
+        if (motor == null || llantas == null) {
+             throw new VehiculoNoConfiguradoException();
+        }
+
+          return motor.apagar();
     }
 
     /**
@@ -164,8 +165,9 @@ public class Vehiculo {
      * @throws PatinajeException Si las condiciones del frenado son peligrosas.
      */
     public String frenarAutoBruscamente(int cantidad) {
-        boolean patinando = true;
-
+        if (!estaConfigurado()) {
+            throw new VehiculoNoConfiguradoException(); 
+        }
         if (!estaEncendido()) {
             throw new VehiculoApagadoException();
         }
@@ -178,7 +180,6 @@ public class Vehiculo {
             if (velocidadActual > llantas.getVelocidadMaxima()) {
                 throw new PatinajeException();
             }
-
             if (cantidad > velocidadActual) {
                 throw new PatinajeException();
             }
@@ -188,15 +189,15 @@ public class Vehiculo {
         if (velocidadActual < 0) velocidadActual = 0;
         motor.setVelocidadActual(velocidadActual);
 
-        
         llantas.verificarVelocidadMaxima(velocidadActual);
 
-        if (velocidadActual == 0 && patinando) {
+        if (velocidadActual == 0) {
             return "El vehículo se ha detenido completamente y ha recuperado el control.";
         }
 
         return "Frenado exitoso. Velocidad actual: " + velocidadActual + " km/h.";
     }
+
 
     /**
      * Verifica si el vehículo tiene motor y llantas configuradas.

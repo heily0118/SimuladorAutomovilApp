@@ -509,6 +509,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
         try {
+        
+        if (vehiculo == null) {
+            throw new VehiculoNoConfiguradoException();
+        }
+
         if (!vehiculo.estaEncendido()) {
             throw new VehiculoApagadoException();
         }
@@ -536,14 +541,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             choque.setVisible(true);
         }
 
-    } catch (VehiculoApagadoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-
-    } catch (LimiteDeVelocidadExcedidoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        
-    } catch (VehiculoNoConfiguradoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
+    } catch (VehiculoNoConfiguradoException | VehiculoApagadoException | LimiteDeVelocidadExcedidoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -582,7 +581,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_estadoAutoActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
-      try {
+       try {
+   
+        if (vehiculo == null) {
+            throw new VehiculoNoConfiguradoException();
+        }
+
         String mensaje = vehiculo.apagar(); 
 
         estadoAuto.setText(vehiculo.getMotor().mostrarEstado());
@@ -591,7 +595,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, mensaje, "Apagado", JOptionPane.INFORMATION_MESSAGE);
 
     } catch (VehiculoNoConfiguradoException | VehiculoApagadoException | AccidentePorAceleracionException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
