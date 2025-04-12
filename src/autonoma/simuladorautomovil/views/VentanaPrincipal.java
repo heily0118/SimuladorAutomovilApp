@@ -623,15 +623,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if (vehiculo.getVelocidadActual() == 0) {
                 JOptionPane.showMessageDialog(this, "El vehiculo ya se encuentra detenido", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-      
+            
+           
             String input = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea disminuir de velocidad:");
             if (input == null || input.trim().isEmpty()) {
                 return;
             }
 
             int cantidadFrenar = Integer.parseInt(input.trim());
-
+            
+            if (cantidadFrenar <= 0){
+                JOptionPane.showMessageDialog(this, "El número no puede ser negativo" , "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         
             String resultado = vehiculo.frenar(cantidadFrenar);
 
@@ -643,13 +647,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (VehiculoDetenidoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
-       
         } catch (VehiculoApagadoException | PatinajeException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
-        
+        } catch (IllegalArgumentException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        
         }
     }//GEN-LAST:event_frenarActionPerformed
 
