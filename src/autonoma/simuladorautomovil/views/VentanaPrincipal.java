@@ -701,7 +701,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
 
     private void ConfigurarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfigurarVehiculoActionPerformed
-         String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
+        String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
         String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
 
         
