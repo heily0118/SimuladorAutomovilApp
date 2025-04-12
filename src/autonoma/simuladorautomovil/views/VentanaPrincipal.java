@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 import autonoma.simuladorautomovil.models.Vehiculo;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -697,26 +698,43 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
 
     private void ConfigurarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfigurarVehiculoActionPerformed
-        String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
+         String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
         String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
 
+        
+        if (motorSeleccionado == null || motorSeleccionado.isBlank() ||
+            llantaSeleccionada == null || llantaSeleccionada.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un tipo de motor y un tipo de llanta.");
+            return;
+        }
+
+       
+        List<String> tiposLlantas = List.of("BUENAS", "BONITAS", "BARATAS");
+        if (!tiposLlantas.contains(llantaSeleccionada.toUpperCase())) {
+            JOptionPane.showMessageDialog(null, "Tipo de llanta no válido. Debe ser: BUENAS, BONITAS o BARATAS.");
+            return;
+        }
+
+       
+        List<String> tiposMotor = List.of("1000", "2000", "3000");
+        if (!tiposMotor.contains(motorSeleccionado)) {
+            JOptionPane.showMessageDialog(null, "Tipo de motor no válido. Debe ser: 1000, 2000 o 3000.");
+            return;
+        }
+
+     
         this.vehiculo = new Vehiculo();
         Lector lector = new LectorArchivoTextoPlano();
         Escritor escritor = new EscritorArchivoTextoPlano("config.csv");
         Taller taller = new Taller(vehiculo, lector, escritor);
 
-            
         ArrayList<String> contenido = new ArrayList<>();
         contenido.add("llantas;" + llantaSeleccionada.toLowerCase());
         contenido.add("motor;" + motorSeleccionado);
 
         try {
-               
             escritor.escribir(contenido);
-
-
             taller.configurarVehiculo("config.csv");
-                
             this.motor = this.vehiculo.getMotor();
 
             JOptionPane.showMessageDialog(null, "Vehículo configurado exitosamente.");
