@@ -518,8 +518,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         
             
-            if (!vehiculo.estaEncendido()) {
+            if (!motor.estaEncendido()) {
                 JOptionPane.showMessageDialog(this, "El vehiculo ya esta apagado", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             int velocidadAcelerar = 10; 
@@ -624,6 +625,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             if (vehiculo.getVelocidadActual() == 0) {
                 JOptionPane.showMessageDialog(this, "El vehiculo ya se encuentra detenido", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             
            
