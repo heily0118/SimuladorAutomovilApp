@@ -137,7 +137,7 @@ public class Taller {
 
         ArrayList<String> contenido = new ArrayList<>();
         contenido.add("llantas;" + vehiculo.getLlantas().getTipoLlanta());
-        contenido.add("motor;" + vehiculo.getMotor().getCilindraje());
+        contenido.add("motor;" + vehiculo.getMotor().getTipoMotor());
 
         escritor.escribir(contenido);
     }

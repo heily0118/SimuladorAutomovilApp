@@ -20,10 +20,6 @@ import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
 
 public class Motor {
 
-    /**
-     * Cilindraje del motor.
-     */
-    private String cilindraje;
     
     /**
      * Velocidad máxima que puede alcanzar el motor (en km/h).
@@ -57,23 +53,7 @@ public class Motor {
         this.tipoMotor = tipoMotor;
     }
 
-    /**
-     * Obtiene el cilindraje del motor.
-     *
-     * @return El cilindraje como una cadena.
-     */
-    public String getCilindraje() {
-        return cilindraje;
-    }
-
-    /**
-     * Establece el cilindraje del motor.
-     *
-     * @param cilindraje El cilindraje a establecer.
-     */
-    public void setCilindraje(String cilindraje) {
-        this.cilindraje = cilindraje;
-    }
+   
 
     /**
      * Obtiene la velocidad máxima permitida del motor.
