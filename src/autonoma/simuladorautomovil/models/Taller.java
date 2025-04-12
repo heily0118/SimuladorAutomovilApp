@@ -38,29 +38,60 @@ public class Taller {
         this.escritor = escritor;
     }
 
+        /**
+     * Obtiene el vehículo configurado.
+     * 
+     * @return El objeto Vehiculo actual.
+     */
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
 
+    /**
+     * Establece el vehículo que será utilizado.
+     * 
+     * @param vehiculo El objeto Vehiculo a configurar.
+     */
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
 
+    /**
+     * Obtiene el lector actual para archivos o datos.
+     * 
+     * @return El objeto Lector.
+     */
     public Lector getLector() {
         return lector;
     }
 
+    /**
+     * Establece el lector que se utilizará para leer datos.
+     * 
+     * @param lector El objeto Lector a configurar.
+     */
     public void setLector(Lector lector) {
         this.lector = lector;
     }
 
+    /**
+     * Obtiene el escritor actual para guardar información.
+     * 
+     * @return El objeto Escritor.
+     */
     public Escritor getEscritor() {
         return escritor;
     }
 
+    /**
+     * Establece el escritor que se utilizará para guardar datos.
+     * 
+     * @param escritor El objeto Escritor a configurar.
+     */
     public void setEscritor(Escritor escritor) {
         this.escritor = escritor;
     }
+
 
     /**
      * Configura el vehículo leyendo el archivo de configuración especificado.

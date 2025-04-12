@@ -32,8 +32,19 @@ import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
  */
 public class Vehiculo {
 
+     /**
+     * Representa las llantas instaladas en el vehículo.
+     */
     private Llanta llantas;
+
+    /**
+     * Motor que impulsa el vehículo.
+     */
     private Motor motor;
+
+    /**
+     * Velocidad actual del vehículo en km/h.
+     */
     private int velocidadActual;
 
     /**
@@ -41,26 +52,56 @@ public class Vehiculo {
      */
     public Vehiculo() {}
 
+    /**
+     * Obtiene el objeto Llanta asociado al vehículo.
+     * 
+     * @return El objeto Llanta configurado.
+     */
     public Llanta getLlantas() {
         return llantas;
     }
 
+    /**
+     * Establece el objeto Llanta para el vehículo.
+     * 
+     * @param llantas El objeto Llanta a asignar.
+     */
     public void setLlantas(Llanta llantas) {
         this.llantas = llantas;
     }
 
+    /**
+     * Obtiene el objeto Motor del vehículo.
+     * 
+     * @return El motor actual del vehículo.
+     */
     public Motor getMotor() {
         return motor;
     }
 
+    /**
+     * Establece el motor del vehículo.
+     * 
+     * @param motor El objeto Motor a asignar.
+     */
     public void setMotor(Motor motor) {
         this.motor = motor;
     }
 
+    /**
+     * Obtiene la velocidad actual del vehículo.
+     * 
+     * @return Velocidad en km/h.
+     */
     public int getVelocidadActual() {
         return velocidadActual;
     }
 
+    /**
+     * Establece la velocidad actual del vehículo. También actualiza la velocidad en el motor si está configurado.
+     * 
+     * @param velocidadActual Velocidad a establecer en km/h.
+     */
     public void setVelocidadActual(int velocidadActual) {
         this.velocidadActual = velocidadActual;
         if (motor != null) {
@@ -75,7 +116,7 @@ public class Vehiculo {
      * @throws VehiculoNoConfiguradoException Si el vehículo no tiene motor o llantas.
      * @throws VehiculoEncendidoException Si el motor ya está encendido.
      */
-    public String encender() {
+    public String encender() throws VehiculoNoConfiguradoException {
         if (!estaConfigurado()) {
             throw new VehiculoNoConfiguradoException(); 
         }
