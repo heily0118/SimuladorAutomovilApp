@@ -616,8 +616,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return;
             }
        
-            if (!vehiculo.estaEncendido()) {
+            if (!motor.estaEncendido()) {
                 JOptionPane.showMessageDialog(this, "El vehiculo ya esta apagado", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             if (vehiculo.getVelocidadActual() == 0) {
