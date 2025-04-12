@@ -134,18 +134,19 @@ public class Motor {
      * @throws AccidentePorAceleracionException Si la velocidad es mayor a 60 km/h.
      */
     public String apagar() throws VehiculoApagadoException, AccidentePorAceleracionException {
-      if (!estaEncendido) {
-          throw new VehiculoApagadoException();
-      }
+        if (!estaEncendido) {
+            throw new VehiculoApagadoException();
+        }
 
-      if (velocidadActual > 60) {
-          throw new AccidentePorAceleracionException();
-      }
+        if (velocidadActual > 60) {
+            throw new AccidentePorAceleracionException();
+        }
 
-      estaEncendido = false;
-      velocidadActual = 0;
-      return "Vehículo apagado.";
-  }
+        estaEncendido = false;
+        velocidadActual = 0;
+        return "Vehículo apagado.";
+    }
+    
     /**
      * Muestra el estado actual del motor como una cadena legible.
      * 

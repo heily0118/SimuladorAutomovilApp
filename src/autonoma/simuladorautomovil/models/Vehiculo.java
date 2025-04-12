@@ -114,7 +114,6 @@ public class Vehiculo {
      * 
      * @return Mensaje indicando si el encendido fue exitoso.
      * @throws VehiculoNoConfiguradoException Si el vehículo no tiene motor o llantas.
-     * @throws VehiculoEncendidoException Si el motor ya está encendido.
      */
     public String encender() throws VehiculoNoConfiguradoException {
         if (!estaConfigurado()) {
@@ -129,13 +128,14 @@ public class Vehiculo {
      * @return Mensaje de confirmación.
      * @throws VehiculoApagadoException Si ya está apagado.
      * @throws AccidentePorAceleracionException Si se intenta apagar con velocidad > 60 km/h.
+     * @throws VehiculoNoConfiguradoException Si el vehículo no tiene motor o llantas.
      */
-    public String apagar() throws VehiculoApagadoException, AccidentePorAceleracionException, VehiculoNoConfiguradoException {
+    public String apagar() throws VehiculoNoConfiguradoException {
         if (motor == null || llantas == null) {
              throw new VehiculoNoConfiguradoException();
         }
 
-          return motor.apagar();
+        return motor.apagar();
     }
 
     /**
@@ -155,7 +155,7 @@ public class Vehiculo {
      * @throws VehiculoApagadoException Si el motor está apagado.
      * @throws LimiteDeVelocidadExcedidoException Si se supera la velocidad de las llantas.
      */
-    public String acelerar(int cantidad) {
+    public String acelerar(int cantidad) throws VehiculoApagadoException, LimiteDeVelocidadExcedidoException {
         if (!estaEncendido()) {
             throw new VehiculoApagadoException();
         }
@@ -166,7 +166,7 @@ public class Vehiculo {
         motor.setVelocidadActual(velocidadActual);
 
 
-       llantas.verificarVelocidadMaxima(velocidadActual);
+        llantas.verificarVelocidadMaxima(velocidadActual);
 
         return "Vehículo acelerado a " + velocidadActual + " km/h.";
     }
@@ -180,7 +180,7 @@ public class Vehiculo {
      * @throws VehiculoDetenidoException Si el vehículo ya está detenido.
      * @throws PatinajeException Si el frenado es muy brusco y puede causar patinaje.
      */
-    public String frenar(int cantidad) {
+    public String frenar(int cantidad) throws VehiculoDetenidoException, VehiculoApagadoException, PatinajeException{
         if (velocidadActual == 0) {
             throw new VehiculoDetenidoException(); 
         }
@@ -201,11 +201,12 @@ public class Vehiculo {
      * 
      * @param cantidad Cantidad de frenado en km/h.
      * @return Mensaje sobre el resultado del frenado.
+     * @throws VehiculoNoConfiguradoException Si el vehículo no tiene motor o llantas.
      * @throws VehiculoApagadoException Si el vehículo está apagado.
      * @throws VehiculoDetenidoException Si el vehículo ya estaba detenido.
      * @throws PatinajeException Si las condiciones del frenado son peligrosas.
      */
-    public String frenarAutoBruscamente(int cantidad) {
+    public String frenarAutoBruscamente(int cantidad) throws VehiculoNoConfiguradoException, VehiculoApagadoException, VehiculoDetenidoException {
         if (!estaConfigurado()) {
             throw new VehiculoNoConfiguradoException(); 
         }

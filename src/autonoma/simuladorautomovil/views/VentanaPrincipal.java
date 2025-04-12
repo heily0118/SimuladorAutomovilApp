@@ -508,52 +508,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcelerarActionPerformed
+
         try {
-        
-        if (vehiculo == null) {
-            throw new VehiculoNoConfiguradoException();
-        }
-
-        if (!vehiculo.estaEncendido()) {
-            throw new VehiculoApagadoException();
-        }
-
-        int velocidadAcelerar = 10; 
-        int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
-        int velocidadActual = vehiculo.getVelocidadActual();
-
-        if (velocidadActual < velocidadMaxima) {
-            vehiculo.acelerar(velocidadAcelerar);
-            reproducirSonido("/autonoma/simuladorautomovil/sounds/aceleracion.wav");
             
-            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-            System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
-        }
+            if (vehiculo == null) {
+                JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            
+            if (!vehiculo.estaEncendido()) {
+                JOptionPane.showMessageDialog(this, "El vehiculo ya esta apagado", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
-        if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
-            throw new LimiteDeVelocidadExcedidoException();
-        }
+            int velocidadAcelerar = 10; 
+            int velocidadMaxima = vehiculo.getLlantas().getVelocidadMaxima();
+            int velocidadActual = vehiculo.getVelocidadActual();
 
-        if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
-            reproducirSonido("/autonoma/simuladorautomovil/sounds/videoChoque.wav");
+            if (velocidadActual < velocidadMaxima) {
+                vehiculo.acelerar(velocidadAcelerar);
+                reproducirSonido("/autonoma/simuladorautomovil/sounds/aceleracion.wav");
+            
+                Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+                System.out.println("Velocidad actual: " + vehiculo.getVelocidadActual());
+            }
 
-            ChoqueCarro choque = new ChoqueCarro(this, true);
-            choque.setVisible(true);
-        }
+            if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
+                JOptionPane.showMessageDialog(this, "Límite de velocidad excedido", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
-    } catch (VehiculoNoConfiguradoException | VehiculoApagadoException | LimiteDeVelocidadExcedidoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+            if (vehiculo.getVelocidadActual() >= velocidadMaxima) {
+                reproducirSonido("/autonoma/simuladorautomovil/sounds/videoChoque.wav");
 
-    } catch (Exception e) {
+                ChoqueCarro choque = new ChoqueCarro(this, true);
+                choque.setVisible(true);
+            }
+
+        } catch (VehiculoNoConfiguradoException | VehiculoApagadoException | LimiteDeVelocidadExcedidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+        } catch (Exception e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        }
     }//GEN-LAST:event_AcelerarActionPerformed
 
     private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
         
         try {
             if (vehiculo == null) {
-                throw new VehiculoNoConfiguradoException();
+                JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }    
             motor.encender();  
 
@@ -581,79 +585,83 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_estadoAutoActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
-       try {
+        try {
    
-        if (vehiculo == null) {
-            throw new VehiculoNoConfiguradoException();
+            if (vehiculo == null) {
+                JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String mensaje = vehiculo.apagar(); 
+
+            estadoAuto.setText(vehiculo.getMotor().mostrarEstado());
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+
+            JOptionPane.showMessageDialog(this, mensaje, "Apagado", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (VehiculoNoConfiguradoException | VehiculoApagadoException | AccidentePorAceleracionException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
         }
-
-        String mensaje = vehiculo.apagar(); 
-
-        estadoAuto.setText(vehiculo.getMotor().mostrarEstado());
-        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-
-        JOptionPane.showMessageDialog(this, mensaje, "Apagado", JOptionPane.INFORMATION_MESSAGE);
-
-    } catch (VehiculoNoConfiguradoException | VehiculoApagadoException | AccidentePorAceleracionException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error al apagar", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_apagarActionPerformed
 
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
-        if (vehiculo == null) {
-            JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
+   
         try {
+            
+            if (vehiculo == null) {
+                JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
        
-        if (!vehiculo.estaEncendido()) {
-            throw new VehiculoApagadoException();
-        }
+            if (!vehiculo.estaEncendido()) {
+                JOptionPane.showMessageDialog(this, "El vehiculo ya esta apagado", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
-        if (vehiculo.getVelocidadActual() == 0) {
-            throw new VehiculoDetenidoException();
-        }
+            if (vehiculo.getVelocidadActual() == 0) {
+                JOptionPane.showMessageDialog(this, "El vehiculo ya se encuentra detenido", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
       
-        String input = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea disminuir de velocidad:");
-        if (input == null || input.trim().isEmpty()) {
-            return;
+            String input = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea disminuir de velocidad:");
+            if (input == null || input.trim().isEmpty()) {
+                return;
+            }
+
+            int cantidadFrenar = Integer.parseInt(input.trim());
+
+        
+            String resultado = vehiculo.frenar(cantidadFrenar);
+
+       
+            Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
+            JOptionPane.showMessageDialog(this, resultado);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (VehiculoDetenidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+       
+        } catch (VehiculoApagadoException | PatinajeException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        
         }
-
-        int cantidadFrenar = Integer.parseInt(input.trim());
-
-        
-        String resultado = vehiculo.frenar(cantidadFrenar);
-
-       
-        Velocidad.setText(vehiculo.getVelocidadActual() + " km/h");
-        JOptionPane.showMessageDialog(this, resultado);
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-    } catch (VehiculoDetenidoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-       
-    } catch (VehiculoApagadoException | PatinajeException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-        
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        
-    }
     }//GEN-LAST:event_frenarActionPerformed
 
     private void FrenarBruscamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrenarBruscamenteActionPerformed
-        if (vehiculo == null) {
-            JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
+   
         try {
+            
+            if (vehiculo == null) {
+                JOptionPane.showMessageDialog(this, "Primero debes configurar el vehículo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             int cantidadFrenar = vehiculo.getVelocidadActual(); 
             String resultado = vehiculo.frenarAutoBruscamente(cantidadFrenar);
 
@@ -686,34 +694,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_FrenarBruscamenteActionPerformed
 
     private void ConfigurarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfigurarVehiculoActionPerformed
-            String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
-            String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
+        String motorSeleccionado = JOptionPane.showInputDialog("Ingrese el tipo de motor (1000, 2000, 3000):");
+        String llantaSeleccionada = JOptionPane.showInputDialog("Ingrese el tipo de llanta (BUENAS, BONITAS, BARATAS):");
 
-            this.vehiculo = new Vehiculo();
-            Lector lector = new LectorArchivoTextoPlano();
-            Escritor escritor = new EscritorArchivoTextoPlano("config.csv");
-            Taller taller = new Taller(vehiculo, lector, escritor);
+        this.vehiculo = new Vehiculo();
+        Lector lector = new LectorArchivoTextoPlano();
+        Escritor escritor = new EscritorArchivoTextoPlano("config.csv");
+        Taller taller = new Taller(vehiculo, lector, escritor);
 
             
-           ArrayList<String> contenido = new ArrayList<>();
-           contenido.add("llantas;" + llantaSeleccionada.toLowerCase());
-           contenido.add("motor;" + motorSeleccionado);
+        ArrayList<String> contenido = new ArrayList<>();
+        contenido.add("llantas;" + llantaSeleccionada.toLowerCase());
+        contenido.add("motor;" + motorSeleccionado);
 
-            try {
+        try {
                
-                escritor.escribir(contenido);
+            escritor.escribir(contenido);
 
 
-                taller.configurarVehiculo("config.csv");
+            taller.configurarVehiculo("config.csv");
                 
-                this.motor = this.vehiculo.getMotor();
+            this.motor = this.vehiculo.getMotor();
 
-                JOptionPane.showMessageDialog(null, "Vehículo configurado exitosamente.");
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Error al configurar el vehículo: " + e.getMessage());
-            } catch (IllegalArgumentException e) {
-                JOptionPane.showMessageDialog(null, "Configuración inválida: " + e.getMessage());
-            }
+            JOptionPane.showMessageDialog(null, "Vehículo configurado exitosamente.");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al configurar el vehículo: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Configuración inválida: " + e.getMessage());
+        }
 
     }//GEN-LAST:event_ConfigurarVehiculoActionPerformed
 
