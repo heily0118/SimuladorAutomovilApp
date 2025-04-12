@@ -20,43 +20,93 @@ import autonoma.simuladorautomovil.exceptions.VehiculoNoConfiguradoException;
 
 public class Motor {
 
+    /**
+     * Cilindraje del motor.
+     */
     private String cilindraje;
+    
+    /**
+     * Velocidad máxima que puede alcanzar el motor (en km/h).
+     */
     private int velocidadMaxima;
+    
+    /**
+     * Indica si el motor está encendido (true) o apagado (false).
+     */
     private boolean estaEncendido;
+    
+    /**
+     * Velocidad actual del vehículo (en km/h).
+     */
     private int velocidadActual;
+    
+    /**
+     * Tipo de motor (por ejemplo, 1000cc, 2000cc).
+     */
     private String tipoMotor;
+
 
     /**
      * Constructor de la clase Motor.
      * 
-     * @param tipoMotor Tipo de motor (identificación o nombre).
-     * @param velocidadMaxima Velocidad máxima permitida por este motor.
+     * @param tipoMotor Es el tipo de motor.
+     * @param velocidadMaxima Retornar la velocidad máxima permitida por este motor.
      */
     public Motor(String tipoMotor, int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
         this.tipoMotor = tipoMotor;
     }
 
+    /**
+     * Obtiene el cilindraje del motor.
+     *
+     * @return El cilindraje como una cadena.
+     */
     public String getCilindraje() {
         return cilindraje;
     }
 
+    /**
+     * Establece el cilindraje del motor.
+     *
+     * @param cilindraje El cilindraje a establecer.
+     */
     public void setCilindraje(String cilindraje) {
         this.cilindraje = cilindraje;
     }
 
+    /**
+     * Obtiene la velocidad máxima permitida del motor.
+     *
+     * @return Retorna la velocidad máxima en km/h.
+     */
     public int getVelocidadMaxima() {
         return velocidadMaxima;
     }
 
+    /**
+     * Establece la velocidad máxima del motor.
+     *
+     * @param velocidadMaxima Es la nueva velocidad máxima en km/h.
+     */
     public void setVelocidadMaxima(int velocidadMaxima) {
         this.velocidadMaxima = velocidadMaxima;
     }
 
+    /**
+     * Obtiene el tipo de motor.
+     *
+     * @return Retorna el tipo de motor como una cadena.
+     */
     public String getTipoMotor() {
         return tipoMotor;
     }
 
+    /**
+     * Establece el tipo de motor.
+     *
+     * @param tipoMotor Es el tipo de motor a establecer.
+     */
     public void setTipoMotor(String tipoMotor) {
         this.tipoMotor = tipoMotor;
     }
@@ -64,7 +114,7 @@ public class Motor {
     /**
      * Enciende el motor si no está encendido.
      * 
-     * @return Mensaje de confirmación.
+     * @return Retorna un mensaje de confirmación de que esta encendido.
      * @throws VehiculoEncendidoException Si el motor ya estaba encendido.
      */
     public String encender() throws VehiculoEncendidoException {
@@ -114,10 +164,20 @@ public class Motor {
         return estaEncendido;
     }
 
+    /**
+     * Establece la velocidad actual del vehículo.
+     *
+     * @param velocidadActual Es la velocidad actual en km/h.
+     */
     public void setVelocidadActual(int velocidadActual) {
         this.velocidadActual = velocidadActual;
     }
 
+    /**
+     * Obtiene la velocidad actual del vehículo.
+     *
+     * @return Retorna la velocidad actual en km/h.
+     */
     public int getVelocidadActual() {
         return velocidadActual;
     }
