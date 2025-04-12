@@ -160,6 +160,7 @@ public class Taller {
                  throw new IllegalArgumentException("Tipo de llanta no reconocido: " + tipo);
          }
      }
+        
     /**
      * Crea una instancia de Motor según el tipo de cilindraje especificado.
      * 

@@ -57,17 +57,31 @@ public class Simulador {
         return vehiculo;
     }
     
-    public void setVehiculo(Vehiculo vehiculo){
+    /**
+     * Asigna un objeto Vehiculo al atributo vehiculo.
+     * 
+     * @param vehiculo El vehículo a establecer.
+     */
+    public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
 
+    /**
+     * Devuelve el objeto Taller actual.
+     * 
+     * @return El taller asignado.
+     */
     public Taller getTaller() {
         return taller;
     }
 
+    /**
+     * Asigna un objeto Taller al atributo taller.
+     * 
+     * @param taller El taller a establecer.
+     */
     public void setTaller(Taller taller) {
         this.taller = taller;
-    }
-    
+    }   
 }
 
