@@ -1,6 +1,0 @@
-Vehículo creado con llantas: Bonitas
-Motor: 3000 c, Potencia: 3000 HP
-Vehículo encendido.
-Aceleró a 50 km/h.
-Frenó a 30 km/h.
-Vehículo apagado.
